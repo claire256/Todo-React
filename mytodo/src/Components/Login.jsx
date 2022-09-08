@@ -63,6 +63,7 @@ let Login = ()=>{
                                   <Button onClick={login} variant="success" type="submit" style={{fontSize:'20px'}}>NEXT</Button>                                 
                               </Form.Group>
                           </Form>
+                            <p className="mt-3" style={{fontSize:'17px'}}>Don't have an account? <a href="Sign-up">Sign up</a></p>
                       </Card.Body>
                   </Card>
                  </Col>

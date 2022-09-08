@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {Navbar, Container} from 'react-bootstrap';
 import Login from './Components/Login'
+import Signup from './Components/Sign-up';
 
 const App = () => {
   return (
@@ -11,8 +12,9 @@ const App = () => {
          <Navbar.Brand><h1>Todo</h1></Navbar.Brand>
        </Container>
      </Navbar>
-    
+
     <Login />
+    <Signup />
     </>
   );
 }
