@@ -29,7 +29,8 @@ let Login = ()=>{
     }
 
     return(
-        <>
+        <div>       
+
          <Container className="pt-5 cont2">
              <Row>
                  <Col>
@@ -63,12 +64,13 @@ let Login = ()=>{
                                   <Button onClick={login} variant="success" type="submit" style={{fontSize:'20px'}}>NEXT</Button>                                 
                               </Form.Group>
                           </Form>
+                          <p className="mt-3" style={{fontSize:'17px'}}>Don't have an account? <a href="Signup">Sign-up</a></p>
                       </Card.Body>
                   </Card>
                  </Col>
              </Row>
          </Container>
-        </>
+        </div>
     )
 }
 
