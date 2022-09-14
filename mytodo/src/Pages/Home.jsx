@@ -1,13 +1,13 @@
 import React from 'react';
 
 
-const Signup = ()=>{
+const Home = ()=>{
 
     return(
       <>
-      
+    <h1>home page</h1>
       </>
     )
 }
 
-export default Signup;
+export default Home;

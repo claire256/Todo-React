@@ -1,20 +1,30 @@
 import React from 'react';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import './App.css';
-import {Navbar, Container} from 'react-bootstrap';
-import Login from './Components/Login'
-import Signup from './Components/Sign-up';
+import Login from './Pages/Login';
+import Home from './Pages/Home';
+import NavigationBar from './Components/NavigationBar';
+import Todos from './Pages/Todos';
+import Account from './Pages/Account';
+import Signup from './Pages/Signup';
+import ErrorPage from './Pages/ErrorPage';
+
 
 const App = () => {
   return (
     <>
-     <Navbar bg="success" expand="lg" variant="dark">
-       <Container>
-         <Navbar.Brand><h1>Todo</h1></Navbar.Brand>
-       </Container>
-     </Navbar>
-
-    <Login />
-    <Signup />
+      <NavigationBar />
+      <Router>
+       <Routes>
+               <Route exact path="/" element={<Home />}/>
+               <Route  path="/todos" element={<Todos />}/>
+               <Route  path="/account" element={<Account />}/>
+               <Route  path="/signup" element={<Signup />}/>
+               <Route  path="/login" element={<Login />}/>
+               <Route  path="*" element={<ErrorPage />}/>
+         
+       </Routes>
+     </Router>
     </>
   );
 }

@@ -1,8 +1,9 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
+
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
  
 
-let Login = ()=>{
+const Login = ()=>{
     
     const [state, setState] = useState({
         user :{
@@ -22,7 +23,7 @@ let Login = ()=>{
     
     }
 
-    let login =(e)=>{
+    let signin =(e)=>{
        e.preventDefault()
       
        console.log(state.user);
@@ -60,10 +61,10 @@ let Login = ()=>{
                                   placeholder="Enter Password"/>
                                   </Form.Group>
                                 <Form.Group> 
-                                  <Button onClick={login} variant="success" type="submit" style={{fontSize:'20px'}}>NEXT</Button>                                 
+                                  <Button onClick={signin} variant="success" type="submit" style={{fontSize:'20px'}}>NEXT</Button>                                 
                               </Form.Group>
                           </Form>
-                            <p className="mt-3" style={{fontSize:'17px'}}>Don't have an account? <a href="Sign-up">Sign up</a></p>
+                             <p className="mt-3" style={{fontSize:'17px'}}>Don't have an account? <a href="Signup">Sign up</a></p>
                       </Card.Body>
                   </Card>
                  </Col>
