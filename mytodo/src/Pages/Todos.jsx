@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { Button, Modal} from 'react-bootstrap';
+import {Button, Form, Modal} from 'react-bootstrap';
 
 
 
@@ -9,6 +9,19 @@ const Todos = ()=>{
 
     const handleClose = ()=> setShow(false); 
     const handleShow = ()=> setShow(true)
+
+    const [task, setTask] = useState({
+        activity:'',
+        description:'',
+        date:''
+    })
+    const updateTask =(e)=> {
+        setTask({...task, [e.target.name]: e.target.value})
+    }
+    const addTask=(e)=>{   
+        e.preventDefault();
+        console.log(task)
+    }
     
     return(
         <>
@@ -20,15 +33,30 @@ const Todos = ()=>{
        
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Create Task</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+            <Form>
+            <Form.Group>
+                <Form.Label >Activity</Form.Label>
+                <Form.Control type="text" name="activity" onChange={updateTask}/>
+            </Form.Group>
+            <Form.Group className="mt-2">
+            <Form.Label >Description</Form.Label>
+            <Form.Control type="text" name="description" onChange={updateTask} style={{height:'100px'}}/>
+            </Form.Group>
+            <Form.Group  className="mt-2">
+            <Form.Label >Date</Form.Label>
+            <Form.Control type="text" name="date" onChange={updateTask}/>
+            </Form.Group>
+            </Form>
+            </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="primary" type="submit" onClick={addTask}>
+            Add
           </Button>
         </Modal.Footer>
       </Modal>
