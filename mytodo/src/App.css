@@ -2,8 +2,12 @@ Button{
     display: block;
     width: 100%;
 }
-
-.cont2{
+.login-cont{
     margin-top: 5%;
-    align-items: center;
+}
+
+@media (min-width: 992px){
+   .login-cont{
+        max-width: 750px !important;
+  }
 }
