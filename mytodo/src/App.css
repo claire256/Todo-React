@@ -3,6 +3,12 @@ Button{
     width: 100%;
 }
 
-.cont2{
+.sign-cont{
      margin-top: 5%; 
 }
+
+@media (min-width: 992px){
+    .sign-cont{
+         max-width: 800px !important;
+   }
+ }
