@@ -6,37 +6,58 @@ import {Button, Form, Modal} from 'react-bootstrap';
 const Todos = ()=>{
    
     const [show, setShow] = useState(false);
+    // const [taskList, setTaskList] = useState('')
 
     const handleClose = ()=> setShow(false); 
     const handleShow = ()=> setShow(true)
 
+    // const saveTask = (taskObj)=>{
+    //     const tempList = taskList
+    //     tempList.push(taskObj)
+    //     setTaskList(tempList)
+
+    // }
+    
     const [task, setTask] = useState({
-        activity:'',
-        description:'',
-        date:''
+          activity:'',
+          description:'',
+          date:''
     })
     const updateTask =(e)=> {
         setTask({...task, [e.target.name]: e.target.value})
+
     }
-    const addTask=(e)=>{   
-        e.preventDefault();
+    const handleSubmit = (e)=>{
+        e.preventDefault()
         console.log(task)
+      
     }
-    
-    return(
+
+   
+    // const handleSave = ()=>{
+    //     let taskObj = {}
+    //     taskObj["Activity"] = task.activity
+    //     taskObj["Description"]= task.description
+    //     taskObj["Date"]= task.date
+    //     saveTask(taskObj)
+// }
+
+   return(
         <>
         <div className ="header text-center">
         <h3 className="mt-4">Todo List</h3>
         <Button className="todos mt-2" variant="success" onClick={handleShow}>Create Task</Button>
         </div>
-        <div></div>
+        <div>
+           {/* {taskList.map((Obj)=><li>{Obj.Activity}</li>)} */}
+        </div>
        
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Create Task</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Form>
+            <Form onSubmit={handleSubmit}>
             <Form.Group>
                 <Form.Label >Activity</Form.Label>
                 <Form.Control type="text" name="activity" onChange={updateTask}/>
@@ -55,7 +76,7 @@ const Todos = ()=>{
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" type="submit" onClick={addTask}>
+          <Button variant="success" onClick={handleSubmit}>
             Add
           </Button>
         </Modal.Footer>
