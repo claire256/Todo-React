@@ -1,24 +1,31 @@
-import logo from './logo.svg';
+import React from 'react';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import './App.css';
+import Login from './Pages/Login';
+import Home from './Pages/Home';
+import NavigationBar from './Components/NavigationBar';
+import Todos from './Pages/Todos';
+import Account from './Pages/Account';
+import Signup from './Pages/Signup';
+import ErrorPage from './Pages/ErrorPage';
 
-function App() {
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavigationBar />
+      <Router>
+       <Routes>
+               <Route exact path="/" element={<Home />}/>
+               <Route  path="/todos" element={<Todos />}/>
+               <Route  path="/account" element={<Account />}/>
+               <Route  path="/signup" element={<Signup />}/>
+               <Route  path="/login" element={<Login />}/>
+               <Route  path="*" element={<ErrorPage />}/>
+         
+       </Routes>
+     </Router>
+    </>
   );
 }
 
