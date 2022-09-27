@@ -2,6 +2,16 @@ Button{
     display: block;
     width: 100%;
 }
+
+.sign-cont{
+     margin-top: 5%; 
+}
+
+@media (min-width: 992px){
+    .sign-cont{
+         max-width: 800px !important;
+   }
+ }
 .login-cont{
     margin-top: 5%;
 }

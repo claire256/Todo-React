@@ -6,7 +6,7 @@ import Home from './Pages/Home';
 import NavigationBar from './Components/NavigationBar';
 import Todos from './Pages/Todos';
 import Account from './Pages/Account';
-import Signup from './Pages/Signup';
+import Signup from './Pages/Sign-up';
 import ErrorPage from './Pages/ErrorPage';
 
 
@@ -22,9 +22,10 @@ const App = () => {
                <Route  path="/signup" element={<Signup />}/>
                <Route  path="/login" element={<Login />}/>
                <Route  path="*" element={<ErrorPage />}/>
-         
+
        </Routes>
      </Router>
+
     </>
   );
 }
