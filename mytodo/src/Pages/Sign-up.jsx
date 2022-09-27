@@ -4,27 +4,23 @@ import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 
 const Signup = ()=>{
 
-    const [user, setUser] = useState({
-        
+    const [user, setUser] = useState({        
             firstname:'',
             lastname:'',
             email:'',
             password:''
+        })
     
-    })
-    const updateInput = (e)=>{
-           setUser({...user,[e.target.name]: e.target.value})
-            
+        const updateInput = (e)=>{
+           setUser({...user,[e.target.name]: e.target.value})            
 }
     const addAccount = (e)=>{
         e.preventDefault()
-
         console.log(user)
     }
 
     return(
-    <>
-    
+    <>    
      <Container className="pt-3 sign-cont">
          <Row>
              <Col>
@@ -56,9 +52,7 @@ const Signup = ()=>{
                 </Card>
              </Col>
          </Row>
-
      </Container>
-
     </>
     )
 }
