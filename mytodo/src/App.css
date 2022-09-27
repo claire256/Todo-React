@@ -3,7 +3,7 @@ Button{
     width: 100%;
 }
 
-.cont2{
+.sign-cont{
      margin-top: 5%; 
 }
 
@@ -26,4 +26,18 @@ Button{
 @media(min-width: 1200px){
    .home-cont{max-width: 700px !important;
    }
+}
+@media (min-width: 992px){
+    .sign-cont{
+         max-width: 800px !important;
+   }
+ }
+.login-cont{
+    margin-top: 5%;
+}
+
+@media (min-width: 992px){
+   .login-cont{
+        max-width: 750px !important;
+  }
 }
