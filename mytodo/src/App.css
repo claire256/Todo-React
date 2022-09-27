@@ -12,3 +12,12 @@ Button{
          max-width: 800px !important;
    }
  }
+.login-cont{
+    margin-top: 5%;
+}
+
+@media (min-width: 992px){
+   .login-cont{
+        max-width: 750px !important;
+  }
+}
