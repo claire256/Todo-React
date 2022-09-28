@@ -13,8 +13,8 @@ import ErrorPage from './Pages/ErrorPage';
 const App = () => {
   return (
     <>
-      <NavigationBar />
       <Router>
+      <NavigationBar />
        <Routes>
                <Route exact path="/" element={<Home />}/>
                <Route  path="/todos" element={<Todos />}/>
