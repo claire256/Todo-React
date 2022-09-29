@@ -5,14 +5,14 @@ const Cards = ()=>{
 
     return(
         <>    
-        <Card className="shadow-lg">
+        <Card className="card">
             <Card.Body>
               <Card.Text>
-                  <p>Activity:</p>
-                  <p>Description:</p>
-                  <p>Date:</p>
+                  <p>Dinner</p>
+                  <p>go to fairway hotel for dinner</p>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                  <i class="fa-regular fa-trash-can"></i>
               </Card.Text>
-              <a href="Todos">View more</a>
             </Card.Body>
         </Card>
         </>
