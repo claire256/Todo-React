@@ -8,7 +8,7 @@ const Home = ()=>{
         <>
         <div style={{backgroundColor: 'rgb(211, 228, 228)'}} className="homediv">
         <Container className="home-cont">
-        <h4 className="pt-5">Today's tasks</h4>
+        <h4 className="pt-4">Today's tasks</h4>
         <div className="carddiv "> 
         <Cards/>
         <Cards/>
@@ -18,9 +18,12 @@ const Home = ()=>{
         <div className="carddiv">
         <Cards/>
         <Cards/>
-        <Cards/>
+        <Cards border="primary"/>
         </div>
-        <Button className="home mt-5" variant ="success" href="Todos">All Todos</Button>
+        <a className="addtodo mt-5" href="/">
+        <i class="fa-regular fa-plus"></i><p className="addpara">Add Todo</p>
+        </a>
+        <Button className="home mt-3" variant ="success" href="Todos">All Todos</Button>
        </Container>
         </div>
         </>

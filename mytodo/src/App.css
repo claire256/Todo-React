@@ -22,7 +22,7 @@ Button{
 }
 .home{
     width: 20%;
-    margin-left: 350px;
+    margin-left: 400px;
 }
  @media(min-width: 1200px){
    .home-cont{max-width: 1000px !important;
@@ -43,10 +43,8 @@ Button{
   }
 }
 .card{
-    width:300px ;
-    line-height: 60px;
-    border-color: rgb(2, 3, 53);
-    border-style:bold !important;
+    width:290px ;
+    line-height: 40px;
 }
 .carddiv{
     display: flex;
@@ -57,6 +55,34 @@ h4{
 }
 .homediv{
     height: 900px;
-    width: 100%;
     padding-top: 50px;
+}
+.addtodo{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+.fa-plus{
+    margin-top: 3px;
+    font-size: 20px;
+}
+.addpara{
+    font-size: 19px;
+}
+.date{
+    display: flex;
+}
+.fa-clock{
+    margin-left: 90px; 
+    margin-top: 10px;
+}
+.cardicon{
+    display: flex;
+    justify-content: flex-end;
+}
+.fa-pen-to-square{
+    color: rgb(136, 136, 66);
+}
+.fa-trash-can{
+   color: red;
 }
