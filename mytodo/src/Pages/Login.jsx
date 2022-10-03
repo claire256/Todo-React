@@ -8,7 +8,6 @@ const Login = ()=>{
     const [user, setUser] = useState({
             email:'',
             password:''
-
     })
 
     const updateInput = (e)=>{
