@@ -12,15 +12,12 @@ const Login = ()=>{
 
     const updateInput = (e)=>{
            setUser({...user,[e.target.name]: e.target.value
-
-           })
-    
+           })    
     }
 
     let signin =(e)=>{
        e.preventDefault()
-      
-       console.log(user);
+         console.log(user);
     }
 
     return(
