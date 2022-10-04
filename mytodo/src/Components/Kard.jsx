@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const Cards = ()=>{
+const Kard = ({date, title, description})=>{
 
     return(
         <>    
@@ -9,11 +9,11 @@ const Cards = ()=>{
             <Card.Body>
               <Card.Text>
                  <div className="date">
-                  <p>02-09-2022</p>
+                  <p>{date}</p>
                   <i class="fa-regular fa-clock"></i><p>12:00pm</p>
                   </div>
-                  <h6 className="pd-3">Dinner</h6>
-                  <p>go to fairway hotel for dinner</p>
+                  <h6 className="pd-3">{title}</h6>
+                  <p>{description}</p>
                   <div className="cardicon">
                   <i class="fa-solid fa-pen-to-square"></i>
                   <i class="fa-regular fa-trash-can"></i>
@@ -25,4 +25,4 @@ const Cards = ()=>{
     )
 }
 
-export default Cards;
+export default Kard;

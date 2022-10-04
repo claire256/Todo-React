@@ -20,9 +20,7 @@ Button{
     width: 15%;
     
 }
-.home{
-    width: 20%;
-    /* margin-left: 400px; */
+.homebutton{
     display: flex;
     justify-content:center;
     align-items: center;
@@ -31,6 +29,7 @@ Button{
    .home-cont{max-width: 1000px !important;
    }
 } 
+
 @media (min-width: 992px){
     .sign-cont{
          max-width: 800px !important;
@@ -45,9 +44,11 @@ Button{
         max-width: 750px !important;
   }
 }
+
 .card{
     width:290px ;
     line-height: 40px;
+    margin-top:10px;
 }
 .carddiv{
     display: flex;
