@@ -1,37 +1,28 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
+
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
  
 
-let Login = ()=>{
+const Login = ()=>{
     
-    const [state, setState] = useState({
-        user :{
+    const [user, setUser] = useState({
             email:'',
             password:''
-        }
     })
 
     const updateInput = (e)=>{
-           setState({
-               ...state,
-               user:{
-                   ...state.user,
-                   [e.target.name]: e.target.value
-               }
-           })
-    
+           setUser({...user,[e.target.name]: e.target.value
+           })    
     }
 
-    let login =(e)=>{
+    let signin =(e)=>{
        e.preventDefault()
-      
-       console.log(state.user);
+         console.log(user);
     }
 
     return(
-        <div>       
-
-         <Container className="pt-5 cont2">
+        <>
+         <Container className="pt-5 login-cont">
              <Row>
                  <Col>
                   <Card>
@@ -61,16 +52,18 @@ let Login = ()=>{
                                   placeholder="Enter Password"/>
                                   </Form.Group>
                                 <Form.Group> 
-                                  <Button onClick={login} variant="success" type="submit" style={{fontSize:'20px'}}>NEXT</Button>                                 
+                                  <Button className="mt-4" onClick={signin} 
+                                  variant="success" type="submit" 
+                                  style={{fontSize:'20px'}}>SUBMIT</Button>                                 
                               </Form.Group>
                           </Form>
-                          <p className="mt-3" style={{fontSize:'17px'}}>Don't have an account? <a href="Signup">Sign-up</a></p>
+                             <p className="mt-3" style={{fontSize:'17px'}}>Don't have an account? <a href="Signup">Sign up</a></p>
                       </Card.Body>
                   </Card>
                  </Col>
              </Row>
          </Container>
-        </div>
+        </>
     )
 }
 

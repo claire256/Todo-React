@@ -1,13 +1,13 @@
 import React from 'react';
 
 
-const Account = ()=>{
+const Signup = ()=>{
 
     return(
       <>
-      
+      <h1>sugnup</h1>
       </>
     )
 }
 
-export default Account;
+export default Signup;

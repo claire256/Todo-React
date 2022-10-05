@@ -4,32 +4,24 @@ import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 
 const Signup = ()=>{
 
-    const [state, setState] = useState({
-        user :{
+    const [user, setUser] = useState({        
             firstname:'',
             lastname:'',
             email:'',
             password:''
-        }
-    })
-    const updateInput = (e)=>{
-           setState({...state, 
-            user:{
-                ...state.user,
-                [e.target.name]: e.target.value
-            }})
-
-    }
+        })
+    
+        const updateInput = (e)=>{
+           setUser({...user,[e.target.name]: e.target.value})            
+}
     const addAccount = (e)=>{
         e.preventDefault()
-
-        console.log(state.user)
+        console.log(user)
     }
 
     return(
-    <>
-    
-     <Container className="pt-3 cont2">
+    <>    
+     <Container className="pt-3 sign-cont">
          <Row>
              <Col>
                 <Card>
@@ -60,9 +52,7 @@ const Signup = ()=>{
                 </Card>
              </Col>
          </Row>
-
      </Container>
-
     </>
     )
 }

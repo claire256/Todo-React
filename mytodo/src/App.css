@@ -1,9 +1,12 @@
+*{
+    box-sizing: border-box;
+}
 Button{
     width: 100%;
 }
 
-.cont2{
-     margin-top: 5%; 
+.sign-cont{
+     margin-top: 10%; 
 }
 
 .header{
@@ -22,12 +25,57 @@ Button{
     width:300px ;
     line-height: 60px;
 }
+.homebutton{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+ @media(min-width: 1200px){
+   .home-cont{max-width: 1000px !important;
+   }
+} 
+
+@media (min-width: 992px){
+    .sign-cont{
+         max-width: 800px !important;
+   }
+ }
+.login-cont{
+    margin-top: 5%;
+}
+
+@media (min-width: 992px){
+   .login-cont{
+        max-width: 750px !important;
+  }
+}
+
+.card{
+    width:290px ;
+    line-height: 40px;
+    margin-top:10px;
+}
 .carddiv{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
-
+h4{
+    margin-top: 50px;
+}
+.homediv{
+    height: 100%;
+    padding-top: 50px;
+}
+.addtodo{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+.fa-plus{
+    margin-top: 3px;
+    font-size: 20px;
+}
 .addpara{
     font-size: 19px;
 }
