@@ -1,5 +1,4 @@
 Button{
-    /* display: block; */
     width: 100%;
 }
 
@@ -12,10 +11,45 @@ Button{
   width: 100%;
   height: 200px;
   padding-top: 50px;
-
 }
 
 .todos{
     width: 15%;
     
 }
+.card{
+    margin-top: 20px;
+    width:300px ;
+    line-height: 60px;
+}
+.carddiv{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.addpara{
+    font-size: 19px;
+}
+.date{
+    display: flex;
+}
+.fa-clock{
+    margin-left: 70px; 
+    margin-top: 8%;
+}
+.cardicon{
+    display: flex;
+    justify-content: flex-end;
+}
+.fa-pen-to-square{
+    color: rgb(136, 136, 66);
+    margin-right: 10px;
+}
+.fa-trash-can{
+   color: red;
+}
+@media(min-width: 1200px){
+    .todo-cont{max-width: 1000px !important;
+    }
+ } 
