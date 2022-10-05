@@ -25,7 +25,7 @@ const Login = ()=>{
          <Container className="pt-5 login-cont">
              <Row>
                  <Col>
-                  <Card>
+                  <Card style={{width: '80%'}}>
                       <Card.Header>
                           <h3>Login</h3>
                       </Card.Header>

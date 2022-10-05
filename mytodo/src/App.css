@@ -6,7 +6,7 @@ Button{
 }
 
 .sign-cont{
-     margin-top: 10%; 
+     margin-top: 4%; 
 }
 
 .header{
@@ -36,7 +36,7 @@ Button{
    }
  }
 .login-cont{
-    margin-top: 5%;
+     margin-top: 5%;
 }
 
 @media (min-width: 992px){

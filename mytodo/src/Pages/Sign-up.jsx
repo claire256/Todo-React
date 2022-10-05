@@ -24,7 +24,7 @@ const Signup = ()=>{
      <Container className="pt-3 sign-cont">
          <Row>
              <Col>
-                <Card>
+                <Card style={{width: '80%'}}>
                     <Card.Header><h3>Sign up</h3></Card.Header>
                     <Card.Body>
                         <Form>
