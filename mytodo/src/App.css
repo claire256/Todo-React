@@ -92,3 +92,47 @@ h4{
 .fa-trash-can{
    color: red;
 }
+.acc-header{
+    background-color: rgb(211, 228, 228);
+    height: 200px;
+    padding-top: 50px;
+  }
+  .fa-circle-user{
+      font-size: 60px;
+      margin-top:40px;
+      color:green ;
+  }
+  .fa-pen{
+    font-size: 60px;
+  }
+  .fa-phone{
+      font-size: 20px;
+      margin-right: 40px;
+  }
+  .acc-icons{
+      display: flex;
+      justify-content:center;
+      align-items: center;
+      margin-top: 30px;
+  } 
+  .fa-calendar-days{
+      font-size: 20px;
+      margin-right: 90px;
+      margin-bottom: 10px;
+  }
+  .fa-gear{
+      font-size: 20px;
+      margin-right: 100px;
+      margin-bottom: 10px;
+  }
+  .fa-envelope{
+      font-size: 20px;
+      margin-right: 50px;
+      margin-bottom: 10px;
+  }
+  .acc-button{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    margin-top: 40px;
+  }
