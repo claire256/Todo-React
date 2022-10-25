@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
-
+import {LoginUser} from '../Api/User';
+import {useNavigate} from 'react-router-dom';
+import AuthUser from '../Auth/AuthUser';
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
  
 
 const Login = ()=>{
-    
+    const navigate = useNavigate();
+    const [errors, setErrors] = useState({});
     const [user, setUser] = useState({
             email:'',
             password:''
@@ -15,9 +18,19 @@ const Login = ()=>{
            })    
     }
 
-    let signin =(e)=>{
+    const signIn =async (e)=>{
        e.preventDefault()
-         console.log(user);
+       setErrors(AuthUser(user))
+       const LoggedUser = await LoginUser(user)
+       console.log('mmmmm>>>>>',LoggedUser)
+       if(LoggedUser.accessToken){
+         console.log('eeeeeeeee', LoggedUser.accessToken)
+        return  navigate('/')
+       }
+       else{
+           setErrors('invalid Email or Password')
+       }
+    
     }
 
     return(
@@ -31,7 +44,7 @@ const Login = ()=>{
                       </Card.Header>
                       <Card.Body>
                           <Form>
-                              <Form.Group className="pt-3">
+                              <Form.Group>
                                   <Form.Label style={{fontSize:'20px'}}>
                                       Email address
                                   </Form.Label>
@@ -40,8 +53,9 @@ const Login = ()=>{
                                   onChange={updateInput}
                                   type="Email" 
                                   placeholder="Enter Email"/>
+                                  {errors.email && <p className="error">{errors.email}</p>}
                                   </Form.Group>
-                                <Form.Group className="pt-3">
+                                <Form.Group>
                                   <Form.Label style={{fontSize:'20px'}}>
                                       Password
                                   </Form.Label>
@@ -50,9 +64,10 @@ const Login = ()=>{
                                   onChange={updateInput}
                                   type="password" 
                                   placeholder="Enter Password"/>
+                                  {errors.password && <p className="error">{errors.password}</p>}
                                   </Form.Group>
                                 <Form.Group> 
-                                  <Button className="mt-4" onClick={signin} 
+                                  <Button className="mt-4" onClick={signIn} 
                                   variant="success" type="submit" 
                                   style={{fontSize:'20px'}}>SUBMIT</Button>                                 
                               </Form.Group>
