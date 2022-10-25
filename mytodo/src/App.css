@@ -17,8 +17,12 @@ Button{
 }
 
 .todos{
-    width: 15%;
-    
+    width: 15%;    
+}
+.card{
+    margin-top: 20px;
+    width:300px ;
+    line-height: 60px;
 }
 .homebutton{
     display: flex;
@@ -79,7 +83,7 @@ h4{
 }
 .fa-clock{
     margin-left: 70px; 
-    margin-top: 10px;
+    margin-top: 8%;
 }
 .cardicon{
     display: flex;
@@ -95,3 +99,7 @@ h4{
 .error{
     color: red;
 }
+@media(min-width: 1200px){
+    .todo-cont{max-width: 1000px !important;
+    }
+ } 
