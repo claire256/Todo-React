@@ -1,28 +1,34 @@
 import React,{useState} from 'react';
+import {AddTodo} from '../Api/tasks'
 import {Button, Form, Modal} from 'react-bootstrap';
+// import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'
 
 
-const CreateTask = ({show, handleClose, save})=>{
+const CreateTask = ({show, handleClose})=>{
+  //  const [selectedDate, setSelectedDate] = useState(new Date());
 
     const [task, setTask] = useState({
-        activity:'',
+        title:'',
         description:'',
         date:''
   })
   const updateTask =(e)=> {
       setTask({...task, [e.target.name]: e.target.value})
 }
-  const handleSubmit = (e)=>{
-      e.preventDefault()
-      console.log(task)    
+  const handleSubmit = async(e)=>{
+      e.preventDefault() 
+      const AddedTodo = await AddTodo(task)  
+      console.log('dddddd', AddedTodo) 
   }
-  const handleSave = ()=>{
-    let taskObj = {}
-    taskObj["Activity"] = task.activity
-    taskObj["Description"]= task.description
-    taskObj["Date"]= task.date
-      save(taskObj)
- }
+  
+//   const handleSave = ()=>{
+//     let taskObj = {}
+//     taskObj["Activity"] = task.activity
+//     taskObj["Description"]= task.description
+//     taskObj["Date"]= task.date
+//       save(taskObj)
+//  }
     return(
         <>
         <Modal show={show} onHide={handleClose}>
@@ -30,27 +36,29 @@ const CreateTask = ({show, handleClose, save})=>{
           <Modal.Title>Create Task</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Form onSubmit={handleSubmit}>
+            <Form>
             <Form.Group>
-                <Form.Label >Activity</Form.Label>
-                <Form.Control type="text" name="activity" onChange={updateTask}/>
+                <Form.Label >Title</Form.Label>
+                <Form.Control type="text" name="title" onChange={updateTask}/>
             </Form.Group>
             <Form.Group className="mt-2">
             <Form.Label >Description</Form.Label>
-            <Form.Control type="text" name="description" onChange={updateTask} style={{height:'100px'}}/>
+            <Form.Control type="text" name="description" onChange={updateTask}/>
             </Form.Group>
-            <Form.Group  className="mt-2">
+            <Form.Group  className="mt-4">
             <Form.Label >Date</Form.Label>
-            <Form.Control type="text" name="date" onChange={updateTask}/>
+            <Form.Control type="date" name="date" onChange={updateTask}/>  
+            {/* <DatePicker 
+            selected ={selectedDate} 
+            onChange={(date)=> setSelectedDate(date)} 
+            minDate = {new Date()}/> */}
             </Form.Group>
             </Form>
             </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="success" onClick={handleSave}>
-            Add
+
+            <Button variant="success" onClick={handleSubmit}>
+            Add task
           </Button>
         </Modal.Footer>
       </Modal>
