@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 
 const CreateTask = ({show, handleClose})=>{
-  //  const [selectedDate, setSelectedDate] = useState(new Date());
+    // const [selectedDate, setSelectedDate] = useState(new Date());
 
     const [task, setTask] = useState({
         title:'',
@@ -19,7 +19,7 @@ const CreateTask = ({show, handleClose})=>{
   const handleSubmit = async(e)=>{
       e.preventDefault() 
       const AddedTodo = await AddTodo(task)  
-      console.log('dddddd', AddedTodo) 
+      console.log('Addeddd', AddedTodo) 
   }
   
 //   const handleSave = ()=>{
@@ -47,11 +47,11 @@ const CreateTask = ({show, handleClose})=>{
             </Form.Group>
             <Form.Group  className="mt-4">
             <Form.Label >Date</Form.Label>
-            <Form.Control type="date" name="date" onChange={updateTask}/>  
-            {/* <DatePicker 
+            <Form.Control type="date" name="date" onChange={updateTask}/> 
+             {/* <DatePicker 
             selected ={selectedDate} 
             onChange={(date)=> setSelectedDate(date)} 
-            minDate = {new Date()}/> */}
+            minDate = {new Date()}/>  */}
             </Form.Group>
             </Form>
             </Modal.Body>
