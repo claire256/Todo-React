@@ -5,7 +5,7 @@ import {Button, Form, Modal} from 'react-bootstrap';
 import 'react-datepicker/dist/react-datepicker.css'
 
 
-const CreateTask = ({show, handleClose})=>{
+const EditTask = ({show, handleClose})=>{
     // const [selectedDate, setSelectedDate] = useState(new Date());
 
     const [task, setTask] = useState({
@@ -16,7 +16,8 @@ const CreateTask = ({show, handleClose})=>{
   const updateTask =(e)=> {
       setTask({...task, [e.target.name]: e.target.value})
 }
-  const handleSubmit = async(e)=>{
+
+const handleSubmit = async(e)=>{
       e.preventDefault() 
       const AddedTodo = await AddTodo(task)  
       console.log('Addeddd', AddedTodo) 
@@ -27,7 +28,7 @@ const CreateTask = ({show, handleClose})=>{
         <>
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Create Task</Modal.Title>
+          <Modal.Title>Edit Task</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Form>
@@ -52,7 +53,7 @@ const CreateTask = ({show, handleClose})=>{
         <Modal.Footer>
 
             <Button variant="success"  onClick={handleSubmit}>
-            Add task
+             Update
           </Button>
         </Modal.Footer>
       </Modal>
@@ -60,4 +61,4 @@ const CreateTask = ({show, handleClose})=>{
     )
 }
 
-export default CreateTask;
+export default EditTask;

@@ -13,13 +13,6 @@ const Todos = ()=>{
     const handleClose = ()=> setShow(false); 
     const handleShow = ()=> setShow(true)
 
-    // save task user has created
-    //  const saveTask = (taskObj)=>{
-    //      const tempList = taskList
-    //      tempList.push(taskObj)
-    //     setTaskList(tempList)
-    //      setShow(false)
-    //  }
      useEffect(()=>{
       const fetchData = async()=>{
         const task = await GetTodo()
@@ -39,7 +32,7 @@ const Todos = ()=>{
         <div>
           <Container className="todo-cont">
             <div className="carddiv">
-           {todos.map((data)=> <Kard title={data.title} description={data.description} date={data.date} />)}
+           {todos.map((data, index)=> <Kard title={data.title} description={data.description} date={data.date} index={index} />)}
          </div>
          </Container>
         </div>

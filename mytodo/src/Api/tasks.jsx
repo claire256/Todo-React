@@ -29,3 +29,14 @@ export const GetTodo = async ()=>{
         return err
     }
 }
+
+export const EditTodo = async (task)=> {
+    try{
+        const response = await axios.put('/todos/:id', task)
+        return response
+    
+    }
+    catch(err){
+        return err
+    }
+}

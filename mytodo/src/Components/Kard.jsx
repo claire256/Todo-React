@@ -1,8 +1,13 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
+import React,{useState} from 'react';
+import { Card } from 'react-bootstrap'; 
+import EditTask from '../Modal/EditTask';
 
-const Kard = ({date, title, description})=>{
-
+const Kard = ({date, title, description, index})=>{
+    const[show, setShow] = useState(false)
+    
+    const handleClose = ()=>{
+        setShow(!show)
+    }
     return(
         <>    
         <Card className="card" border="warning">
@@ -15,12 +20,13 @@ const Kard = ({date, title, description})=>{
                   <h6 className="pd-3">{title}</h6>
                   <p>{description}</p>
                   <div className="cardicon">
-                  <i class="fa-solid fa-pen-to-square"></i>
+                  <i class="fa-solid fa-pen-to-square" onClick={()=> setShow(true) }></i>
                   <i class="fa-regular fa-trash-can"></i>
                   </div>
               </Card.Text>
             </Card.Body>
         </Card>
+        <EditTask show = {show} handleClose = {handleClose}/>
         </>
     )
 }
