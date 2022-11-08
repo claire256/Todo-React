@@ -5,7 +5,7 @@ const ErrorPage = ()=>{
 
     return(
       <>
-      
+      <h6>Page Not Found</h6>
       </>
     )
 }
