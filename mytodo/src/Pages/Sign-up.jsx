@@ -21,11 +21,8 @@ const Signup = ()=>{
     const addAccount = async (e)=>{
         e.preventDefault()
         setErrors(AuthUser(user))
-        // console.log(user)
         const UserAdded = await AddUser(user)
-       console.log(UserAdded)
        if(UserAdded.status === 200){
-        console.log('eeeeeeeee', UserAdded.status)
        return  navigate('/')
       }
       else{

@@ -25,6 +25,7 @@ const Login = ()=>{
        console.log('mmmmm>>>>>',LoggedUser)
        if(LoggedUser.accessToken){
          console.log('eeeeeeeee', LoggedUser.accessToken)
+         localStorage.setItem('access_token', LoggedUser.accessToken)
         return  navigate('/')
        }
        else{
