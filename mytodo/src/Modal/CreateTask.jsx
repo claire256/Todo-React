@@ -2,12 +2,10 @@ import React,{useState} from 'react';
 import {AddTodo} from '../Api/tasks'
 import {Button, Form, Modal, Spinner} from 'react-bootstrap';
 import ValidateTodos from '../Auth/ValidateTodos'
-// import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 
 
 const CreateTask = ({show, handleClose})=>{
-  //  const [selectedDate, setSelectedDate] = useState(new Date());
     const [buttonLoading, setButtonLoading] = useState(false)
     const [apierrors, setApierrors] = useState(null)
     const [errors, setErrors] = useState({})
@@ -21,26 +19,24 @@ const CreateTask = ({show, handleClose})=>{
 }
   const handleSubmit = async(e)=>{
       e.preventDefault()
-      setButtonLoading(true) 
+      setErrors({})
       const todoError = ValidateTodos(task)
       if(Object.keys(todoError).length>0){
         setErrors(todoError)
-        setButtonLoading(false)
          return;
       }
+      setButtonLoading(true) 
       const AddedTodo = await AddTodo(task)  
-      console.log('dddddd', AddedTodo)
       if(AddedTodo.id){
          handleClose()
-         setButtonLoading(false)
      } 
       else{
-        console.log('bbbbbbb>>', apierrors)
          setApierrors(AddedTodo)
-         setButtonLoading(false)
+      
       }
-        
+      setButtonLoading(false)      
     }
+
     return(
         <>
         <Modal show={show} onHide={handleClose}>
@@ -63,10 +59,6 @@ const CreateTask = ({show, handleClose})=>{
             <Form.Group  className="mt-4">
             <Form.Label >Date</Form.Label>
             <Form.Control type="date" name="date" onChange={updateTask}/>  
-            {/* <DatePicker 
-            selected ={selectedDate} 
-            onChange={(date)=> setSelectedDate(date)} 
-            minDate = {new Date()}/> */}
             {errors.date && <p className = "error">{errors.date}</p>}
             </Form.Group>
             </Form>
