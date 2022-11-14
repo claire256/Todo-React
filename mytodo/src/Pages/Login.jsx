@@ -22,9 +22,7 @@ const Login = ()=>{
        e.preventDefault()
        setErrors(AuthUser(user))
        const LoggedUser = await LoginUser(user)
-       console.log('mmmmm>>>>>',LoggedUser)
        if(LoggedUser.accessToken){
-         console.log('eeeeeeeee', LoggedUser.accessToken)
          localStorage.setItem('access_token', LoggedUser.accessToken)
         return  navigate('/')
        }

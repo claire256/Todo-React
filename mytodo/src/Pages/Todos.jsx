@@ -44,7 +44,7 @@ const Todos = ()=>{
          </Container>
         </div>
        
-        <CreateTask show={show} handleClose={handleClose}/>
+      {show &&<CreateTask show={show} handleClose={handleClose}/>}
         </>
     )
 }                                                                                                                                                                                                                                                                                                                                                                                                                              

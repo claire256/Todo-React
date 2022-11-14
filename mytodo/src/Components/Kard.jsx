@@ -10,7 +10,6 @@ const Kard = ({date, title, description})=>{
               <Card.Text>
                  <div className="date">
                   <p>{date}</p>
-                  {/* <i class="fa-regular fa-clock"></i><p>12:00pm</p> */}
                   </div>
                   <h6 className="pd-3">{title}</h6>
                   <p>{description}</p>
