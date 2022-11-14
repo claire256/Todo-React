@@ -2,33 +2,32 @@ import React,{useState, useEffect} from 'react';
 import {Button, Container} from 'react-bootstrap';
 import CreateTask from '../Modal/CreateTask'
 import Kard from '../Components/Kard'
-import {GetTodo} from '../Api/tasks'
+import {GetTodos} from '../Api/tasks'
 
 const Todos = ()=>{
    
     const [show, setShow] = useState(false);
-    // Store all tasks user has created
      const [todos, setTodos] = useState([]);
 
     const handleClose = ()=> setShow(false); 
     const handleShow = ()=> setShow(true)
 
-    // save task user has created
-    //  const saveTask = (taskObj)=>{
-    //      const tempList = taskList
-    //      tempList.push(taskObj)
-    //     setTaskList(tempList)
-    //      setShow(false)
-    //  }
      useEffect(()=>{
       const fetchData = async()=>{
-        const task = await GetTodo()
-      console.log('dddd', task)
-        setTodos(task.data)
+        const tasks = await GetTodos()
+      console.log('dddd', tasks)
+      // tasks.push({date: "2022-11-10T21:00:00.000Z",
+
+        setTodos(tasks)
       }
       fetchData() 
     
     }, [])
+//     {date: "2022-11-10T21:00:00.000Z"
+// description: "testing"
+// id: "000"
+// title: ""
+// users_id: "29"}
        
    return(
         <>
@@ -44,7 +43,7 @@ const Todos = ()=>{
          </Container>
         </div>
        
-      {show &&<CreateTask show={show} handleClose={handleClose}/>}
+      {show &&<CreateTask show={show} handleClose={handleClose} todos={todos} setTodos={setTodos}/>}
         </>
     )
 }                                                                                                                                                                                                                                                                                                                                                                                                                              

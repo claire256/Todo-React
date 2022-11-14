@@ -18,14 +18,14 @@ export const AddTodo = async (task)=>{
     }
 }
 
-export const GetTodo = async ()=>{
+export const GetTodos = async ()=>{
     const token = localStorage.getItem('access_token')
     try{
         const response = await axios.get('/todos', {
             headers: {"Authorization": 'Bearer '+token}
         })
         console.log('getttt>>>>', response.data)
-        return response.data
+        return response.data.data
     }
     catch(err){
         return err
