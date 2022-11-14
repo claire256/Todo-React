@@ -7,11 +7,15 @@ export const AddTodo = async (task)=>{
     const response = await axios.post('/todos', task, {
       headers: {"Authorization": 'Bearer '+token}
     })
-      console.log('tttttt>>>>>', response)
-      return response
+      return response.data.data[0]
     
     }catch(err){
-        console.log('eeee>>>', err.response)
-        return err.response
+        if(err.response.status === 400){
+        console.log('eeee>>>', err.response.data.data)
+         return err.response.data.data
+        }
+        else{
+            return 'Something went wrong'
+        }
     }
 }
