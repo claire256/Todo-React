@@ -23,8 +23,7 @@ export const GetTodos = async ()=>{
     try{
         const response = await axios.get('/todos', {
             headers: {"Authorization": 'Bearer '+token}
-        })
-        console.log('getttt>>>>', response.data)
+        })   
         return response.data.data
     }
     catch(err){

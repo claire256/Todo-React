@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import {AddTodo} from '../Api/tasks'
 import {Button, Form, Modal, Spinner} from 'react-bootstrap';
 import ValidateTodos from '../Auth/ValidateTodos'
-import 'react-datepicker/dist/react-datepicker.css'
 
 
 const CreateTask = ({show, handleClose, todos, setTodos})=>{
@@ -28,8 +27,6 @@ const CreateTask = ({show, handleClose, todos, setTodos})=>{
       setButtonLoading(true) 
       const AddedTodo = await AddTodo(task)  
       if(AddedTodo.id){
-        // const newTodos = todos
-        // newTodos.push(AddedTodo)
         const newTodos = [AddedTodo, ...todos]
         setTodos(newTodos)
          handleClose()

@@ -14,20 +14,13 @@ const Todos = ()=>{
 
      useEffect(()=>{
       const fetchData = async()=>{
-        const tasks = await GetTodos()
-      console.log('dddd', tasks)
-      // tasks.push({date: "2022-11-10T21:00:00.000Z",
-
+      const tasks = await GetTodos()
         setTodos(tasks)
       }
       fetchData() 
     
     }, [])
-//     {date: "2022-11-10T21:00:00.000Z"
-// description: "testing"
-// id: "000"
-// title: ""
-// users_id: "29"}
+
        
    return(
         <>
