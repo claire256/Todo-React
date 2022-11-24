@@ -1,12 +1,9 @@
 import React,{useState} from 'react';
 import {AddTodo} from '../Api/tasks'
 import {Button, Form, Modal} from 'react-bootstrap';
-// import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'
 
 
 const CreateTask = ({show, handleClose})=>{
-    // const [selectedDate, setSelectedDate] = useState(new Date());
 
     const [task, setTask] = useState({
         title:'',
@@ -42,10 +39,6 @@ const CreateTask = ({show, handleClose})=>{
             <Form.Group  className="mt-4">
             <Form.Label >Date</Form.Label>
             <Form.Control type="date" name="date" onChange={updateTask}/> 
-             {/* <DatePicker 
-            selected ={selectedDate} 
-            onChange={(date)=> setSelectedDate(date)} 
-            minDate = {new Date()}/>  */}
             </Form.Group>
             </Form>
             </Modal.Body>

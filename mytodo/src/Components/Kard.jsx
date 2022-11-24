@@ -1,32 +1,25 @@
-import React,{useState} from 'react';
-import { Card } from 'react-bootstrap'; 
-import EditTask from '../Modal/EditTask';
+import React from 'react';
+import {Card} from 'react-bootstrap'; 
 
-const Kard = ({date, title, description, index})=>{
-    const[show, setShow] = useState(false)
+const Kard = ({todo, editShow, setEditShow, openEdit})=>{
     
-    const handleClose = ()=>{
-        setShow(!show)
-    }
     return(
         <>    
-        <Card className="card" border="warning">
+        <Card className="card" border="warning" key={todo.id}>
             <Card.Body>
               <Card.Text>
                  <div className="date">
-                  <p>{date}</p>
-                  {/* <i class="fa-regular fa-clock"></i><p>12:00pm</p> */}
+                  <p>{todo.date}</p>
                   </div>
-                  <h6 className="pd-3">{title}</h6>
-                  <p>{description}</p>
+                  <p className="pd-3">{todo.title}</p>
+                  <p>{todo.description}</p>
                   <div className="cardicon">
-                  <i class="fa-solid fa-pen-to-square" onClick={()=> setShow(true) }></i>
-                  <i class="fa-regular fa-trash-can"></i>
+                  <i className="fa-solid fa-pen-to-square" onClick={()=> openEdit(todo) }></i>
+                  <i className="fa-regular fa-trash-can"></i>
                   </div>
               </Card.Text>
             </Card.Body>
         </Card>
-        <EditTask show = {show} handleClose = {handleClose}/>
         </>
     )
 }
