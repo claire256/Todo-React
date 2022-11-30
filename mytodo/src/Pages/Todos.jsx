@@ -4,22 +4,30 @@ import CreateTask from '../Modal/CreateTask'
 import Kard from '../Components/Kard'
 import {GetTodo} from '../Api/tasks'
 import EditTaskPopup from '../Modal/EditTaskPopup';
+import DeleteTaskPopup from '../Modal/DeleteTaskPopup';
 
 const Todos = ()=>{
    
     const [show, setShow] = useState(false);
     const [editShow, setEditShow] = useState(false);
+    const [delshow, setDelShow] = useState(false);
     const [todos, setTodos] = useState([]);
     const [selectedTodo, setSelectedTodo] = useState({})
 
     const handleClose = ()=> setShow(false); 
     const handleShow = ()=> setShow(true)
     
+    const handleDelClose = ()=> setDelShow(false); 
+   
     const handleEditClose = ()=> setEditShow(false);
      
     const openEdit = (todo)=>{
           setSelectedTodo(todo)
           setEditShow(true)
+    }
+    const openDelete = (todo) =>{
+      setSelectedTodo(todo)
+      setDelShow(true)
     }
 
     useEffect(()=>{
@@ -38,8 +46,10 @@ const Todos = ()=>{
         </div>
         <div>
           <Container className="todo-cont">
-            <div className="carddiv">
-           {todos.map((data)=> <Kard todo={data} key={data.id} editShow={editShow} setEditShow={setEditShow} openEdit={openEdit}/>)}
+          <div className="carddiv">
+           {todos.map((data)=> <Kard todo={data} key={data.id} editShow={editShow}
+            setEditShow={setEditShow} openEdit={openEdit} openDelete ={openDelete} 
+            delshow={delshow} setDelShow={setDelShow}/>)}
          </div>
          </Container>
         </div>
@@ -47,6 +57,8 @@ const Todos = ()=>{
         {show && <CreateTask show={show} handleClose={handleClose}/>}
         {editShow && <EditTaskPopup editShow={editShow} handleEditClose={handleEditClose}
          todos={todos} setTodos={setTodos} setSelectedTodo={setSelectedTodo} selectedTodo={selectedTodo}/>}
+         {delshow && <DeleteTaskPopup todos={todos} setTodos={setTodos} setSelectedTodo={setSelectedTodo} 
+         selectedTodo={selectedTodo} delshow={delshow} handleDelClose ={handleDelClose}/>}
         </>
     )
 }                                                                                                                                                                                                                                                                                                                                                                                                                              
