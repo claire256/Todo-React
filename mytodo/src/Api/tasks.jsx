@@ -17,3 +17,16 @@ export const AddTodo = async (task)=>{
         }
     }
 }
+
+export const GetTodos = async ()=>{
+    const token = localStorage.getItem('access_token')
+    try{
+        const response = await axios.get('/todos', {
+            headers: {"Authorization": 'Bearer '+token}
+        })   
+        return response.data.data
+    }
+    catch(err){
+        return err
+    }
+}

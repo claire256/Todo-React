@@ -2,10 +2,9 @@ import React,{useState} from 'react';
 import {AddTodo} from '../Api/tasks'
 import {Button, Form, Modal, Spinner} from 'react-bootstrap';
 import ValidateTodos from '../Auth/ValidateTodos'
-import 'react-datepicker/dist/react-datepicker.css'
 
 
-const CreateTask = ({show, handleClose})=>{
+const CreateTask = ({show, handleClose, todos, setTodos})=>{
     const [buttonLoading, setButtonLoading] = useState(false)
     const [apierrors, setApierrors] = useState(null)
     const [errors, setErrors] = useState({})
@@ -28,6 +27,8 @@ const CreateTask = ({show, handleClose})=>{
       setButtonLoading(true) 
       const AddedTodo = await AddTodo(task)  
       if(AddedTodo.id){
+        const newTodos = [AddedTodo, ...todos]
+        setTodos(newTodos)
          handleClose()
      } 
       else{
