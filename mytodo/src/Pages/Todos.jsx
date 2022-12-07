@@ -3,6 +3,7 @@ import {Button, Container} from 'react-bootstrap';
 import CreateTask from '../Modal/CreateTask'
 import Kard from '../Components/Kard'
 import {GetTodos} from '../Api/tasks'
+import Home from './Home'
 
 const Todos = ()=>{
    
@@ -37,6 +38,7 @@ const Todos = ()=>{
         </div>
        
       {show &&<CreateTask show={show} handleClose={handleClose} todos={todos} setTodos={setTodos}/>}
+      {<Home todos={todos} setTodos={setTodos}/>}
         </>
     )
 }                                                                                                                                                                                                                                                                                                                                                                                                                              

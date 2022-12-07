@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const Kard = ({date, title, description})=>{
+const Kard = ({todo})=>{
 
     return(
         <>    
@@ -9,10 +9,10 @@ const Kard = ({date, title, description})=>{
             <Card.Body>
               <Card.Text>
                  <div className="date">
-                  <p>{date}</p>
+                  <p>{todo.date}</p>
                   </div>
-                  <h6 className="pd-3">{title}</h6>
-                  <p>{description}</p>
+                  <h6 className="pd-3">{todo.title}</h6>
+                  <p>{todo.description}</p>
                   <div className="cardicon">
                   <i class="fa-solid fa-pen-to-square"></i>
                   <i class="fa-regular fa-trash-can"></i>
