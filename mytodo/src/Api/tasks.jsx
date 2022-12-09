@@ -23,10 +23,16 @@ export const GetTodos = async ()=>{
     try{
         const response = await axios.get('/todos', {
             headers: {"Authorization": 'Bearer '+token}
-        })   
+        }) 
+        console.log('res', response.data)  
         return response.data.data
     }
     catch(err){
-        return err
+        if(err.response.data === 400){
+            console.log('error', err.response.data)
+            return err.response.data
+        }else{
+        return 'Something went wrong'
+        }
     }
 }

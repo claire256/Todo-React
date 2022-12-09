@@ -31,7 +31,7 @@ const Todos = ()=>{
         <div>
           <Container className="todo-cont">
             <div className="carddiv">
-           {todos.map((data)=> <Kard title={data.title} description={data.description} date={data.date} />)}
+           {todos.map((data)=> <Kard todo={data} />)}
          </div>
          </Container>
         </div>
