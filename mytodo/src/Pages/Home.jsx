@@ -7,7 +7,7 @@ import {format,isAfter} from 'date-fns'
 const Home = ()=>{
     const [todayTodos, setTodayTodos] = useState([]);
     const [upcomingTodos, setUpcomingTodos] = useState([])
-     const [apierrors, setApierrors] = useState(null)
+    const [apierrors, setApierrors] = useState(null)
 
     useEffect(()=>{
       const fetchData = async ()=>{
