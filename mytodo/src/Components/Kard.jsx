@@ -1,21 +1,21 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import {Card} from 'react-bootstrap'; 
 
-const Kard = ({todo})=>{
-
+const Kard = ({todo, editShow, setEditShow, openEdit})=>{
+    
     return(
         <>    
-        <Card className="card" border="warning">
+        <Card className="card" border="warning" key={todo.id}>
             <Card.Body>
               <Card.Text>
                  <div className="date">
                   <p>{todo.date}</p>
                   </div>
-                  <h6 className="pd-3">{todo.title}</h6>
+                  <p className="pd-3">{todo.title}</p>
                   <p>{todo.description}</p>
                   <div className="cardicon">
-                  <i class="fa-solid fa-pen-to-square"></i>
-                  <i class="fa-regular fa-trash-can"></i>
+                  <i className="fa-solid fa-pen-to-square" onClick={()=> openEdit(todo) }></i>
+                  <i className="fa-regular fa-trash-can"></i>
                   </div>
               </Card.Text>
             </Card.Body>

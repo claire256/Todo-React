@@ -3,15 +3,24 @@ import {Button, Container} from 'react-bootstrap';
 import CreateTask from '../Modal/CreateTask'
 import Kard from '../Components/Kard'
 import {GetTodos} from '../Api/tasks'
-import Home from './Home'
+import EditTaskPopup from '../Modal/EditTaskPopup';
 
 const Todos = ()=>{
    
     const [show, setShow] = useState(false);
-     const [todos, setTodos] = useState([]);
+    const [editShow, setEditShow] = useState(false);
+    const [todos, setTodos] = useState([]);
+    const [selectedTodo, setSelectedTodo] = useState({})
 
     const handleClose = ()=> setShow(false); 
     const handleShow = ()=> setShow(true)
+    
+    const handleEditClose = ()=> setEditShow(false);
+     
+    const openEdit = (todo)=>{
+          setSelectedTodo(todo)
+          setEditShow(true)
+    }
 
      useEffect(()=>{
       const fetchData = async()=>{
@@ -32,13 +41,14 @@ const Todos = ()=>{
         <div>
           <Container className="todo-cont">
             <div className="carddiv">
-           {todos.map((data)=> <Kard title={data.title} description={data.description} date={data.date} />)}
+           {todos.map((data)=> <Kard todo={data} key={data.id} editShow={editShow} setEditShow={setEditShow} openEdit={openEdit}/>)}
          </div>
          </Container>
         </div>
        
-      {show &&<CreateTask show={show} handleClose={handleClose} todos={todos} setTodos={setTodos}/>}
-      {<Home todos={todos} setTodos={setTodos}/>}
+        {show && <CreateTask show={show} handleClose={handleClose}/>}
+        {editShow && <EditTaskPopup editShow={editShow} handleEditClose={handleEditClose}
+         todos={todos} setTodos={setTodos} setSelectedTodo={setSelectedTodo} selectedTodo={selectedTodo}/>}
         </>
     )
 }                                                                                                                                                                                                                                                                                                                                                                                                                              

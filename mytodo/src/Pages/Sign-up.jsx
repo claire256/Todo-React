@@ -22,20 +22,14 @@ const Signup = ()=>{
 }
     const addAccount = async (e)=>{
         e.preventDefault()
-        const todoError = AuthUser(user)
-        if((todoError).length>0){
-            setErrors(todoError)
-            return;
-        }
-        setButtonLoading(true)
+        setErrors(AuthUser(user))
         const UserAdded = await AddUser(user)
-        if(UserAdded.data){
-        return  navigate('/')
-        }
-        else{
-          setApierrors(UserAdded)
-        }
-        setButtonLoading(false)
+       if(UserAdded.status === 200){
+       return  navigate('/')
+      }
+      else{
+          setErrors('invalid Email or Password')
+      }
     }
     
     return(
