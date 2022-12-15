@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {LoginUser} from '../Api/User';
 import {useNavigate} from 'react-router-dom';
-import AuthUser from '../Auth/AuthUser';
+import ValUser from '../Auth/ValUser';
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
  
 
@@ -20,7 +20,7 @@ const Login = ()=>{
 
     const signIn =async (e)=>{
        e.preventDefault()
-       setErrors(AuthUser(user))
+       setErrors(ValUser(user))
        const LoggedUser = await LoginUser(user)
        console.log('mmmmm>>>>>',LoggedUser)
        if(LoggedUser.accessToken){
