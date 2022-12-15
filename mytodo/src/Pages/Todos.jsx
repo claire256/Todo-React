@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react';
 import {Button, Container} from 'react-bootstrap';
 import CreateTask from '../Modal/CreateTask'
 import Kard from '../Components/Kard'
-import {GetTodo} from '../Api/tasks'
+import {GetTodos} from '../Api/tasks'
 import EditTaskPopup from '../Modal/EditTaskPopup';
 
 const Todos = ()=>{
@@ -22,13 +22,15 @@ const Todos = ()=>{
           setEditShow(true)
     }
 
-    useEffect(()=>{
+     useEffect(()=>{
       const fetchData = async()=>{
-      const task = await GetTodo()
-        setTodos(task.data)
+      const tasks = await GetTodos()
+        setTodos(tasks)
       }
       fetchData() 
-        }, [])
+    
+    }, [])
+
        
    return(
         <>
