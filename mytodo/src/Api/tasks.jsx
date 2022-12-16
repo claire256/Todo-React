@@ -34,3 +34,23 @@ export const GetTodos = async ()=>{
         }
     }
 }
+
+export const EditTodo = async (task)=> {
+    const token = localStorage.getItem('access_token')
+    
+    try{
+        const response = await axios.put(`/todos/${task.id}`, task, {
+            headers: {"Authorization": 'Bearer '+token}
+        })
+        return response.data.data   
+    }
+    catch(err){
+        if(err.response.status === 400){
+            return err.response.data.data
+        }
+        else{
+           
+            return 'Something went wrong'
+        }
+    }
+}

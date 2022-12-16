@@ -2,11 +2,13 @@ import React, {useState} from 'react';
 import {AddUser} from '../Api/User'
 import {useNavigate} from 'react-router-dom';
 import AuthUser from '../Auth/AuthUser'
-import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 
 
 const Signup = ()=>{
     const navigate = useNavigate();
+    const [buttonLoading, setButtonLoading] = useState(false)
+    const [apierrors, setApierrors] = useState(null)
     const [errors, setErrors] = useState({});
     const [user, setUser] = useState({        
             first_name:'',
@@ -40,6 +42,7 @@ const Signup = ()=>{
                     <Card.Body>
                         <Form>
                             <Form.Group>
+                               {apierrors && <p className ="error">{apierrors}</p>}
                                 <Form.Label style={{fontSize:'20px'}}>First name</Form.Label>
                                 <Form.Control type="name" name="first_name" onChange={updateInput} placeholder="Enter first name"/>
                                 {errors.first_name && <p className="error">{errors.first_name}</p>}
@@ -65,7 +68,19 @@ const Signup = ()=>{
                                 {errors.confirm_password && <p className="error">{errors.confirm_password}</p>}
                             </Form.Group>
                             <Form.Group className="pt-2">
-                                <Button onClick={addAccount} style={{fontSize:'20px'}} variant="success" type="submit">Add Account</Button>
+                            {!buttonLoading && (<Button className="mt-4"
+                            type="submit" variant="success" onClick={addAccount} style={{fontSize:'20px'}}>Add Account</Button>)} 
+                            {buttonLoading && (<Button className="mt-4" 
+                            type="submit" variant="success" onClick={addAccount} style={{fontSize:'20px'}} disabled={buttonLoading}>
+                                <Spinner
+                                   as="span"
+                                   variant="light"
+                                   size="sm"
+                                   role="status"
+                                   aria-hidden="true"
+                                   animation="border"/>     
+                                   Add Account
+                                  </Button>)}                  
                             </Form.Group>
                         </Form>
                         <p className="mt-3" style={{fontSize:'17px'}}>Already have an account? Login <a href="Login">here</a></p>

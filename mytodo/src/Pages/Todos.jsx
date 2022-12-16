@@ -3,14 +3,24 @@ import {Button, Container} from 'react-bootstrap';
 import CreateTask from '../Modal/CreateTask'
 import Kard from '../Components/Kard'
 import {GetTodos} from '../Api/tasks'
+import EditTaskPopup from '../Modal/EditTaskPopup';
 
 const Todos = ()=>{
    
     const [show, setShow] = useState(false);
-     const [todos, setTodos] = useState([]);
+    const [editShow, setEditShow] = useState(false);
+    const [todos, setTodos] = useState([]);
+    const [selectedTodo, setSelectedTodo] = useState({})
 
     const handleClose = ()=> setShow(false); 
     const handleShow = ()=> setShow(true)
+    
+    const handleEditClose = ()=> setEditShow(false);
+     
+    const openEdit = (todo)=>{
+          setSelectedTodo(todo)
+          setEditShow(true)
+    }
 
      useEffect(()=>{
       const fetchData = async()=>{
@@ -36,7 +46,9 @@ const Todos = ()=>{
          </Container>
         </div>
        
-      {show &&<CreateTask show={show} handleClose={handleClose} todos={todos} setTodos={setTodos}/>}
+        {show && <CreateTask show={show} handleClose={handleClose}/>}
+        {editShow && <EditTaskPopup editShow={editShow} handleEditClose={handleEditClose}
+         todos={todos} setTodos={setTodos} setSelectedTodo={setSelectedTodo} selectedTodo={selectedTodo}/>}
         </>
     )
 }                                                                                                                                                                                                                                                                                                                                                                                                                              
