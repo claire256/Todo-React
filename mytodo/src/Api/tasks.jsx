@@ -54,12 +54,10 @@ export const DeleteTodo = async(task)=>{
         const response = await axios.delete(`/todos/${task.id}`, {
      headers: {"Authorization": 'Beare '+token}       
         })
-        console.log('vvvvv', response.data.data)
         return response.data.data
     }
     catch(err){
         if(err.response.status === 400){
-        console.log('eeeee', err.response.data.data)
          return err.response.data.data
         }
         else{
