@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card} from 'react-bootstrap'; 
 
-const Kard = ({todo, editShow, setEditShow, openEdit})=>{
+const Kard = ({todo, editShow, setEditShow, openEdit, openDelete, delshow, setDelShow})=>{
     
     return(
         <>    
@@ -15,7 +15,7 @@ const Kard = ({todo, editShow, setEditShow, openEdit})=>{
                   <p>{todo.description}</p>
                   <div className="cardicon">
                   <i className="fa-solid fa-pen-to-square" onClick={()=> openEdit(todo) }></i>
-                  <i className="fa-regular fa-trash-can"></i>
+                  <i className="fa-regular fa-trash-can" onClick={()=> openDelete(todo)}></i>
                   </div>
               </Card.Text>
             </Card.Body>
