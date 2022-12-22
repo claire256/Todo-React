@@ -4,11 +4,15 @@ import jwt_decode from 'jwt-decode';
 export const AddUser = async (user)=>{
     try{
     const response = await axios.post('/signup', user)
-     return response
-
+    return response.data.data
     }
-    catch(err){       
-        return err.response.data
+    catch(err){  
+        if(err.response.status === 400) {  
+        return err.response.data.data
+        }
+        else{
+            return 'Something went wrong'
+        }
     }
 }
 export const LoginUser = async (user)=>{
@@ -16,9 +20,13 @@ export const LoginUser = async (user)=>{
         const response = await axios.post('/login', user)
         return response.data
     }
-
     catch(err){
-        return err
+        if(err.response.status === 400){
+            return err.response.data
+        }
+        else{
+            return 'Something went wrong'
+        }
     }
     
 }
