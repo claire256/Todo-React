@@ -35,6 +35,7 @@ const handleSubmit = async(e)=>{
       const filtertodos = todos.filter(function(ele){
         return ele.id !== EditedTodo.id
       })
+
       if(EditedTodo.id){
       const newTodos=[EditedTodo, ...filtertodos]
       setTodos(newTodos)

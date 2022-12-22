@@ -16,8 +16,8 @@ const Kard = ({todo})=>{
                   <p className="pd-3">{todo.title}</p>
                   <p>{todo.description}</p>
                   <div className="cardicon">
-                  <i className="fa-solid fa-pen-to-square"></i>
-                  <i className="fa-regular fa-trash-can"></i>
+                  <i className="fa-solid fa-pen-to-square" onClick={()=> openEdit(todo) }></i>
+                  <i className="fa-regular fa-trash-can" onClick={()=> openDelete(todo)}></i>
                   </div>
               </Card.Text>
             </Card.Body>
