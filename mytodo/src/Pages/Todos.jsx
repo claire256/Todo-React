@@ -1,58 +1,44 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import {Button, Container} from 'react-bootstrap';
 import CreateTask from '../Modal/CreateTask'
 import Kard from '../Components/Kard'
-
-const data = [
-  {
-    activity: "travel",
-    description: "travel to mombasa",
-    date: "2022-07-11"
-},
-
- {
-   activity: "travel",
-   description: "travel to mombasa",
-   date: "2022-07-11"
-}, 
- {
-    activity: "travel",
-    description: "travel to mombasa",
-    date: "2022-07-11"
-}, 
-  {
-    activity: "travel",
-    description: "travel to mombasa",
-    date: "2022-07-11"
-}, 
-  {
-    activity: "travel",
-    description: "travel to mombasa",
-    date: "2022-07-11"
-},
-{
-    activity: "travel",
-    description: "travel to mombasa",
-    date: "2022-07-11"
-}
-]
+import {GetTodos} from '../Api/tasks'
+import EditTaskPopup from '../Modal/EditTaskPopup';
+import DeleteTaskPopup from '../Modal/DeleteTaskPopup';
 
 const Todos = ()=>{
    
     const [show, setShow] = useState(false);
-    // Store all tasks user has created
-    const [taskList, setTaskList] = useState([]);
+    const [editShow, setEditShow] = useState(false);
+    const [delshow, setDelShow] = useState(false);
+    const [todos, setTodos] = useState([]);
+    const [selectedTodo, setSelectedTodo] = useState({})
 
     const handleClose = ()=> setShow(false); 
     const handleShow = ()=> setShow(true)
+    
+    const handleDelClose = ()=> setDelShow(false); 
+   
+    const handleEditClose = ()=> setEditShow(false);
+     
+    const openEdit = (todo)=>{
+          setSelectedTodo(todo)
+          setEditShow(true)
+    }
+    const openDelete = (todo) =>{
+      setSelectedTodo(todo)
+      setDelShow(true)
+    }
 
-    // save task user has created
-     const saveTask = (taskObj)=>{
-         const tempList = taskList
-         tempList.push(taskObj)
-        setTaskList(tempList)
-         setShow(false)
-     }
+     useEffect(()=>{
+      const fetchData = async()=>{
+      const tasks = await GetTodos()
+        setTodos(tasks)
+      }
+      fetchData() 
+    
+    }, [])
+
        
    return(
         <>
@@ -62,16 +48,21 @@ const Todos = ()=>{
         </div>
         <div>
           <Container className="todo-cont">
-            <div className="carddiv">
-         {taskList.map((obj)=><Kard />)}         
-         {data.map((item)=> <Kard activity={item.activity} description={item.description} date={item.date} />)}
+          <div className="carddiv">
+           {todos.map((data)=> <Kard todo={data} key={data.id} editShow={editShow}
+            setEditShow={setEditShow} openEdit={openEdit} openDelete ={openDelete} 
+            delshow={delshow} setDelShow={setDelShow}/>)}
          </div>
          </Container>
         </div>
        
-        <CreateTask show={show} handleClose={handleClose} save={saveTask}/>
+        {show && <CreateTask show={show} handleClose={handleClose}/>}
+        {editShow && <EditTaskPopup editShow={editShow} handleEditClose={handleEditClose}
+         todos={todos} setTodos={setTodos} setSelectedTodo={setSelectedTodo} selectedTodo={selectedTodo}/>}
+         {delshow && <DeleteTaskPopup todos={todos} setTodos={setTodos} setSelectedTodo={setSelectedTodo} 
+         selectedTodo={selectedTodo} delshow={delshow} handleDelClose ={handleDelClose}/>}
         </>
     )
-}
+}                                                                                                                                                                                                                                                                                                                                                                                                                              
 
 export default Todos;
