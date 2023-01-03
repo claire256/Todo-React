@@ -34,16 +34,13 @@ export const GetUser = async()=>{
     const token = localStorage.getItem('access_token')
     const decoded = jwt_decode(token) 
     const id = decoded.id
-    console.log('uuuu', id)
     try{
         const response = await axios.get(`/users/${id}`,{
             headers: {Authorization: 'Bearer '+token}
         })
-        console.log('ppp', response.data.data)
         return response.data
     }
     catch(err){
-        console.log('err', err.response.data)
         if(err.response.data === 400){
             return err.response.data
         }
