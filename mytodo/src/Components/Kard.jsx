@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import {format} from 'date-fns'
 
-const Kard = ({todo})=>{
+const Kard = ({todo, editShow, setEditShow, openEdit, openDelete, delshow, setDelShow})=>{
     const date = new Date(todo.date)
     const formatDate = format(date, 'yyyy-MM-dd')
     return(
