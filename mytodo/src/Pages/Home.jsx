@@ -11,9 +11,9 @@ const Home = ()=>{
 
     useEffect(()=>{
       const fetchData = async ()=>{
-        const fetchedtodos = await GetTodos()
-        if(fetchedtodos.length>0){
-           const filtertodayTodos = fetchedtodos.filter(function(ele){
+          const fetchedtodos = await GetTodos()
+          if(fetchedtodos.length>0){
+            const filtertodayTodos = fetchedtodos.filter(function(ele){
             const today = new Date()
             const formatted = format(today, 'yyyy-MM-dd')
             const date = new Date(ele.date)
