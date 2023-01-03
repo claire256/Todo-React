@@ -14,7 +14,7 @@ const Kard = ({todo, editShow, setEditShow, openEdit})=>{
                   <p className="pd-3">{todo.title}</p>
                   <p>{todo.description}</p>
                   <div className="cardicon">
-                  <i className="fa-solid fa-pen-to-square" onClick={()=> openEdit(todo) }></i>
+                  <i className="fa-solid fa-pen-to-square" onClick={()=> openEdit(todo)}></i>
                   <i className="fa-regular fa-trash-can"></i>
                   </div>
               </Card.Text>
