@@ -59,7 +59,7 @@ const CreateTask = ({show, handleClose, todos, setTodos})=>{
             </Form.Group>
             <Form.Group  className="mt-4">
             <Form.Label >Date</Form.Label>
-            <Form.Control type="date" name="date" onChange={updateTask}/>  
+            <Form.Control type="date" name="date" onChange={updateTask}/> 
             {errors.date && <p className = "error">{errors.date}</p>}
             </Form.Group>
             </Form>
