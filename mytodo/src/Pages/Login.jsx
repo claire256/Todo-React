@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {LoginUser} from '../Api/User';
 import {useNavigate} from 'react-router-dom';
 import ValUser from '../Auth/ValUser';
-import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
  
 const Login = ()=>{
     const navigate = useNavigate();
@@ -19,7 +19,7 @@ const Login = ()=>{
     }
     const signIn =async (e)=>{
        e.preventDefault()
-       const todoError = AuthUser(user)
+       const todoError = ValUser(user)
        if((todoError).length>0){
            setErrors(todoError)
            return;

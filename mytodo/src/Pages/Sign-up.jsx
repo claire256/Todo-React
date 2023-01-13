@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {AddUser} from '../Api/User'
 import {useNavigate} from 'react-router-dom';
 import ValUser from '../Auth/ValUser'
-import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 
 
 const Signup = ()=>{
