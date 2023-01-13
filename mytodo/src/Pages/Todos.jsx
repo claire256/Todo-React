@@ -48,10 +48,9 @@ const Todos = ()=>{
         </div>
         <div>
           <Container className="todo-cont">
-          <div className="carddiv">
-           {todos.map((data)=> <Kard todo={data} key={data.id} editShow={editShow}
-            setEditShow={setEditShow} openEdit={openEdit} openDelete ={openDelete} 
-            delshow={delshow} setDelShow={setDelShow}/>)}
+            <div className="carddiv">
+           {todos.map((data)=> <Kard todo={data} editShow={editShow}
+            setEditShow={setEditShow} openEdit={openEdit} openDelete ={openDelete} />)}
          </div>
          </Container>
         </div>
