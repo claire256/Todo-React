@@ -8,11 +8,13 @@ import Todos from './Pages/Todos';
 import Account from './Pages/Account';
 import Signup from './Pages/Sign-up';
 import ErrorPage from './Pages/ErrorPage';
+import AppContextProvider from './Context/Context'
 
 
 const App = () => {
   return (
     <>
+    <AppContextProvider>
       <Router>
       <NavigationBar /> 
        <Routes>
@@ -25,6 +27,7 @@ const App = () => {
 
        </Routes>
      </Router>
+     </AppContextProvider>
 
     </>
   );
