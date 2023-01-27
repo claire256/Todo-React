@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
-import {AddUser} from '../Api/User'
+import React, {useState, useContext, useEffect} from 'react';
+import {AddUser} from '../Context/Actions/User'
 import {useNavigate} from 'react-router-dom';
 import AuthUser from '../Auth/AuthUser'
 import { Button, Card, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
+import { AppContext } from '../Context/Context';
 
 
 const Signup = ()=>{
     const navigate = useNavigate();
+    const{userState, userDispatch} = useContext(AppContext)
     const [buttonLoading, setButtonLoading] = useState(false)
     const [apierrors, setApierrors] = useState(null)
     const [errors, setErrors] = useState({});
@@ -20,16 +22,28 @@ const Signup = ()=>{
             const updateInput = (e)=>{
            setUser({...user,[e.target.name]: e.target.value})            
 }
+    useEffect(()=>{
+        console.log('user', userState)
+        if(userState.signup || userState.signup !== undefined){
+            userDispatch({})
+            return  navigate('/')
+           }
+        if(userState.signup_errors){
+            setApierrors(userState.signup_errors.data)
+            userDispatch({})
+        }
+    },[userState])
     const addAccount = async (e)=>{
         e.preventDefault()
-        setErrors(AuthUser(user))
-        const UserAdded = await AddUser(user)
-       if(UserAdded.status === 200){
-       return  navigate('/')
-      }
-      else{
-          setErrors('invalid Email or Password')
-      }
+        const todoErrors = AuthUser(user)
+        if(todoErrors.length>0){
+            setErrors(todoErrors)
+            return
+        }
+        setButtonLoading(true)
+         await AddUser(user)(userDispatch)
+       
+      setButtonLoading(false)
     }
     
     return(
