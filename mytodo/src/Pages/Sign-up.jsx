@@ -24,11 +24,11 @@ const Signup = ()=>{
 }
     useEffect(()=>{
         console.log('user', userState)
-        if(userState.signup || userState.signup !== undefined){
+        if(userState.signup !=null){
             userDispatch({})
             return  navigate('/')
            }
-        if(userState.signup_errors){
+        if(userState.signup_errors !=null){
             setApierrors(userState.signup_errors.data)
             userDispatch({})
         }
