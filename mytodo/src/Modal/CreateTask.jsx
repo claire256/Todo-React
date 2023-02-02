@@ -1,10 +1,12 @@
-import React,{useState} from 'react';
-import {AddTodo} from '../Api/tasks'
+import React,{useState, useContext, useEffect} from 'react';
+import {AddTodo} from '../Context/Actions/Task'
 import {Button, Form, Modal, Spinner} from 'react-bootstrap';
 import ValidateTodos from '../Auth/ValidateTodos'
+import {AppContext} from '../Context/Context'
 
 
 const CreateTask = ({show, handleClose, todos, setTodos})=>{
+    const {todoState, todoDispatch} = useContext(AppContext)
     const [buttonLoading, setButtonLoading] = useState(false)
     const [apierrors, setApierrors] = useState(null)
     const [errors, setErrors] = useState({})
@@ -16,6 +18,20 @@ const CreateTask = ({show, handleClose, todos, setTodos})=>{
   const updateTask =(e)=> {
       setTask({...task, [e.target.name]: e.target.value})
 }
+  useEffect(()=>{
+    if(todoState.addtodo !=null){
+      const newTodos = [...todoState.addtodo.data, ...todos]
+      setTodos(newTodos)
+       handleClose()
+      todoDispatch({})
+   } 
+   if(todoState.addtodo_errors !=null){
+      console.log('err', todoState.addtodo_errors)
+     setApierrors(todoState.addtodo_errors.data)
+     todoDispatch({})
+    }
+  },[todoState])
+
   const handleSubmit = async(e)=>{
       e.preventDefault()
       setErrors({})
@@ -25,16 +41,7 @@ const CreateTask = ({show, handleClose, todos, setTodos})=>{
          return;
       }
       setButtonLoading(true) 
-      const AddedTodo = await AddTodo(task)  
-      if(AddedTodo.id){
-        const newTodos = [AddedTodo, ...todos]
-        setTodos(newTodos)
-         handleClose()
-     } 
-      else{
-         setApierrors(AddedTodo)
-      
-      }
+      await AddTodo(task)(todoDispatch)  
       setButtonLoading(false)      
     }
 
