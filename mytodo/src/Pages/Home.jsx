@@ -7,7 +7,7 @@ import {format,isAfter} from 'date-fns'
 const Home = ()=>{
     const [todayTodos, setTodayTodos] = useState([]);
     const [upcomingTodos, setUpcomingTodos] = useState([])
-     const [apierrors, setApierrors] = useState(null)
+    const [apierrors, setApierrors] = useState(null)
 
     useEffect(()=>{
       const fetchData = async ()=>{
@@ -50,7 +50,7 @@ const Home = ()=>{
         <div className="carddiv">
          {upcomingTodos.map((data) => <Kard todo={data} key={data.id} />)}
         </div>
-        <a className="addtodo mt-5" href="/">
+        <a className="addtodo mt-5" href="/Todos">
         <i className="fa-regular fa-plus"></i><p className="addpara">Add Todo</p>
         </a>
         <div className="homebutton">
