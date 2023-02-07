@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react';
 import {Button, Container} from 'react-bootstrap';
 import CreateTask from '../Modal/CreateTask'
 import Kard from '../Components/Kard'
-import {GetTodo} from '../Api/tasks'
+import {GetTodos} from '../Api/tasks'
 import EditTaskPopup from '../Modal/EditTaskPopup';
 import DeleteTaskPopup from '../Modal/DeleteTaskPopup';
 
@@ -30,13 +30,15 @@ const Todos = ()=>{
       setDelShow(true)
     }
 
-    useEffect(()=>{
+     useEffect(()=>{
       const fetchData = async()=>{
-      const task = await GetTodo()
-        setTodos(task.data)
+      const tasks = await GetTodos()
+        setTodos(tasks)
       }
       fetchData() 
-        }, [])
+    
+    }, [])
+
        
    return(
         <>
@@ -46,10 +48,9 @@ const Todos = ()=>{
         </div>
         <div>
           <Container className="todo-cont">
-          <div className="carddiv">
-           {todos.map((data)=> <Kard todo={data} key={data.id} editShow={editShow}
-            setEditShow={setEditShow} openEdit={openEdit} openDelete ={openDelete} 
-            delshow={delshow} setDelShow={setDelShow}/>)}
+            <div className="carddiv">
+           {todos.map((data)=> <Kard todo={data} editShow={editShow}
+            setEditShow={setEditShow} openEdit={openEdit} openDelete ={openDelete} />)}
          </div>
          </Container>
         </div>

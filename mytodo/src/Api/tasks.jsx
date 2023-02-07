@@ -6,24 +6,32 @@ export const AddTodo = async (task)=>{
     const response = await axios.post('/todos', task, {
       headers: {"Authorization": 'Bearer '+token}
     })
-
-      return response
+      return response.data.data[0]
     
     }catch(err){
-        return err.response
+        if(err.response.status === 400){
+         return err.response.data.data
+        }
+        else{
+            return 'Something went wrong'
+        }
     }
 }
 
-export const GetTodo = async ()=>{
+export const GetTodos = async ()=>{
     const token = localStorage.getItem('access_token')
     try{
         const response = await axios.get('/todos', {
             headers: {"Authorization": 'Bearer '+token}
-        })
-        return response.data
+        })  
+        return response.data.data
     }
     catch(err){
-        return err
+        if(err.response.data === 400){
+            return err.response.data
+        }else{
+        return 'Something went wrong'
+        }
     }
 }
 
