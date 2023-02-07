@@ -1,22 +1,23 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import {format} from 'date-fns'
 
-const Kard = ({date, activity, description})=>{
-
+const Kard = ({todo, editShow, setEditShow, openEdit, openDelete, delshow, setDelShow})=>{
+    const date = new Date(todo.date)
+    const formatDate = format(date, 'yyyy-MM-dd')
     return(
         <>    
-        <Card className="card" border="warning">
+        <Card className="card" border="warning" key={todo.id}>
             <Card.Body>
               <Card.Text>
                  <div className="date">
-                  <p>{date}</p>
-                  <i class="fa-regular fa-clock"></i><p>12:00pm</p>
+                  <p>{formatDate}</p>
                   </div>
-                  <h6 className="pd-3">{activity}</h6>
-                  <p>{description}</p>
+                  <p className="pd-3">{todo.title}</p>
+                  <p>{todo.description}</p>
                   <div className="cardicon">
-                  <i class="fa-solid fa-pen-to-square"></i>
-                  <i class="fa-regular fa-trash-can"></i>
+                  <i className="fa-solid fa-pen-to-square" onClick={()=> openEdit(todo) }></i>
+                  <i className="fa-regular fa-trash-can" onClick={()=> openDelete(todo)}></i>
                   </div>
               </Card.Text>
             </Card.Body>
