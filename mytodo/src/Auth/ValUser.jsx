@@ -1,4 +1,4 @@
-const AuthUser = (user)=>{
+const ValUser = (user)=>{
    let errors = {}
     
    if(!user.first_name){
@@ -26,8 +26,7 @@ const AuthUser = (user)=>{
     errors.confirm_password = "Passwords do not match"
    }
 
-      
    return errors;
 };
 
-export default AuthUser;
+export default ValUser;

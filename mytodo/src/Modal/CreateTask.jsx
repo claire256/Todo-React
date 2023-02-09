@@ -4,7 +4,7 @@ import {Button, Form, Modal, Spinner} from 'react-bootstrap';
 import ValidateTodos from '../Auth/ValidateTodos'
 
 
-const CreateTask = ({show, handleClose})=>{
+const CreateTask = ({show, handleClose, todos, setTodos})=>{
     const [buttonLoading, setButtonLoading] = useState(false)
     const [apierrors, setApierrors] = useState(null)
     const [errors, setErrors] = useState({})
@@ -27,6 +27,8 @@ const CreateTask = ({show, handleClose})=>{
       setButtonLoading(true) 
       const AddedTodo = await AddTodo(task)  
       if(AddedTodo.id){
+        const newTodos = [AddedTodo, ...todos]
+        setTodos(newTodos)
          handleClose()
      } 
       else{
@@ -57,7 +59,7 @@ const CreateTask = ({show, handleClose})=>{
             </Form.Group>
             <Form.Group  className="mt-4">
             <Form.Label >Date</Form.Label>
-            <Form.Control type="date" name="date" onChange={updateTask}/>  
+            <Form.Control type="date" name="date" onChange={updateTask}/> 
             {errors.date && <p className = "error">{errors.date}</p>}
             </Form.Group>
             </Form>
