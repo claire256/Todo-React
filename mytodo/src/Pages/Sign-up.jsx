@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {AddUser} from '../Api/User'
 import {useNavigate} from 'react-router-dom';
-import AuthUser from '../Auth/AuthUser'
+import ValUser from '../Auth/ValUser'
 import { Button, Card, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 
 
@@ -22,7 +22,7 @@ const Signup = ()=>{
 }
     const addAccount = async (e)=>{
         e.preventDefault()
-        setErrors(AuthUser(user))
+        setErrors(ValUser(user))
         const UserAdded = await AddUser(user)
        if(UserAdded.status === 200){
        return  navigate('/')
