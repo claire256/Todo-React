@@ -1,18 +1,26 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import {Button, Container} from 'react-bootstrap';
+import EditProfilePopup from '../Modal/EditProfilePopup'
 import {GetUser} from '../Api/User';
 
 const Account = ()=>{
     const [user, setUser] = useState({})
+    const [editShow, setEditShow] = useState(false)
 
     useEffect(()=>{
      const fetchUser = async()=>{
        const fetchedUser = await GetUser(user)
-       setUser(fetchedUser.data)
+       setUser(fetchedUser)
      }
      fetchUser()
     }, [])
+
+    const handleEditClose =()=> setEditShow(false)
+    
+    const OpenEdit =()=>{
+       setEditShow(true)
+     }
 
     return(
       <>
@@ -23,17 +31,16 @@ const Account = ()=>{
         <i className="fa-solid fa-circle-user"></i>
         <p style={{fontSize: '25px'}} className="pt-2">{user.first_name}</p>
         <p style={{fontSize: '25px'}} className="pt-2">{user.last_name}</p>
-        <p style={{fontSize: '25px'}} className="pt-2">{user.email}</p>       
-        </div>
+        <p style={{fontSize: '25px'}} className="pt-2">{user.email}</p>
         
-        <div className="mt-5">
-          
         <div className="acc-button">
-        <Button style={{width: '200px'}} variant="success">Edit profile</Button>
+        <Button style={{width: '200px'}} variant="success" onClick={OpenEdit}>Edit profile</Button>
         </div>
         </div>
       </Container>
       </div>
+      {editShow && <EditProfilePopup editShow={editShow} handleEditClose={handleEditClose} 
+      user={user} setUser={setUser}/>}
       </>
     )
 }
