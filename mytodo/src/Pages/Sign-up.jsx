@@ -1,7 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {AddUser} from '../Context/Actions/User'
 import {useNavigate} from 'react-router-dom';
-import AuthUser from '../Auth/AuthUser'
+import ValUser from '../Auth/ValUser'
 import { Button, Card, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 import { AppContext } from '../Context/Context';
 
@@ -35,7 +35,7 @@ const Signup = ()=>{
     },[userState])
     const addAccount = async (e)=>{
         e.preventDefault()
-        const todoErrors = AuthUser(user)
+        const todoErrors = ValUser(user)
         if(todoErrors.length>0){
             setErrors(todoErrors)
             return

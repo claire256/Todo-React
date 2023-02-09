@@ -29,7 +29,6 @@ export const LoginUser = async (user)=>{
             return 'Something went wrong'
         }
     }
-    
 }
 
 export const GetUser = async()=>{
@@ -40,7 +39,7 @@ export const GetUser = async()=>{
         const response = await axios.get(`/users/${id}`,{
             headers: {Authorization: 'Bearer '+token}
         })
-        return response.data
+        return response.data.data
     }
     catch(err){
         if(err.response.data === 400){
@@ -49,6 +48,24 @@ export const GetUser = async()=>{
         else{
         return 'Something went wrong'
         }
+    }    
+}
+export const EditUser = async(user)=>{
+    const token = localStorage.getItem('access_token')
+    const decode = jwt_decode(token)
+    const id = decode.id
+    try{
+        const response = await axios.put(`/users/${id}`, user, {
+            headers: {Authorization: 'Bearer '+token}
+        })
+        return response.data.data
     }
-    
+    catch(err){
+        if(err.response.data === 400){
+            return err.response.data.data
+        }
+        else{
+            return 'Something went wrong'
+        }
+    }
 }
