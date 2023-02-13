@@ -14,7 +14,7 @@ import AppContextProvider from './Context/Context';
 const App = () => {
   return (
     <>
-      <AppContextProvider>
+    <AppContextProvider>
       <Router>
       <NavigationBar /> 
        <Routes>
@@ -27,7 +27,8 @@ const App = () => {
 
        </Routes>
      </Router>
-    </AppContextProvider>
+     </AppContextProvider>
+
     </>
   );
 }
