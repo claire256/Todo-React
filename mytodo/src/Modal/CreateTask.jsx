@@ -3,6 +3,7 @@ import {AddTodo} from '../Context/Actions/Task'
 import {Button, Form, Modal, Spinner} from 'react-bootstrap';
 import ValidateTodos from '../Auth/ValidateTodos'
 import {AppContext} from '../Context/Context'
+import { ADDTODO, ADDTODO_ERRORS } from '../Context/Types';
 
 
 const CreateTask = ({show, handleClose, todos, setTodos})=>{
@@ -19,16 +20,15 @@ const CreateTask = ({show, handleClose, todos, setTodos})=>{
       setTask({...task, [e.target.name]: e.target.value})
 }
   useEffect(()=>{
-    if(todoState.addtodo !=null){
-      const newTodos = [...todoState.addtodo.data, ...todos]
+    if(todoState.todo?.id){
+      const newTodos = [todoState.todo, ...todos]
       setTodos(newTodos)
-       handleClose()
-      todoDispatch({})
+      handleClose()
+      todoDispatch({type: ADDTODO, payload: null})
    } 
-   if(todoState.addtodo_errors !=null){
-      console.log('err', todoState.addtodo_errors)
-     setApierrors(todoState.addtodo_errors.data)
-     todoDispatch({})
+   if(todoState.addtodo_errors){
+     setApierrors(todoState.addtodo_errs)
+     todoDispatch({type: ADDTODO_ERRORS, payload: null})
     }
   },[todoState])
 
