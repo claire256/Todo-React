@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-// import { LoginUser } from "../Api/User";
 import { useNavigate } from "react-router-dom";
 import ValUser from "../Auth/ValUser";
 import {
@@ -13,6 +12,7 @@ import {
 } from "react-bootstrap";
 import { AppContext } from "../Context/Context";
 import { LoginUser } from "../Context/Actions/User";
+import { LOGIN, LOGIN_ERRORS } from "../Context/Types";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,18 +28,15 @@ const Login = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   useEffect(() => {
-      console.log('user', userState)
-    //  debugger
-    if (!userState.login||userState.login !== undefined) {
-      localStorage.setItem("access_token", userState.login.accessToken);
-      userDispatch({})
-      return navigate("/")
+    if (userState.user?.accessToken) {
+      localStorage.setItem("access_token", userState.user.accessToken);
+      userDispatch({ type: LOGIN, payload: null });
+      return navigate("/");
     }
-    if(!userState.login_errors || userState.login_errors !== undefined ){
-        setApierrors(userState.login_err.data)
-        userDispatch({})
+    if (userState.login_err) {
+      setApierrors(userState.login_err);
+      userDispatch({ type: LOGIN_ERRORS, payload: null });
     }
-
   }, [userState]);
   const signIn = async (e) => {
     e.preventDefault();
@@ -50,6 +47,7 @@ const Login = () => {
     }
     setButtonLoading(true);
     await LoginUser(user)(userDispatch);
+
     setButtonLoading(false);
   };
   return (
