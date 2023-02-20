@@ -7,7 +7,6 @@ export const AddTodo =  (task) => async (dispatch)=>{
     const response = await axios.post('/todos', task, {
       headers: {"Authorization": 'Bearer '+token}
     })
-      console.log('res', response.data.data[0])
       dispatch({type: ADDTODO, payload: response.data.data[0]})
     }
     catch(err){
