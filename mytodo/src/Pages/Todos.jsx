@@ -48,20 +48,29 @@ const Todos = () => {
       <div>
         <Container className="todo-cont">
           <div className="carddiv">
-            {todos.map((data) => (
-              <Kard
-                todo={data}
-                editShow={editShow}
-                setEditShow={setEditShow}
-                openEdit={openEdit}
-                openDelete={openDelete}
-              />
-            ))}
+            {todos.map((data) => {
+              return (
+                <Kard
+                  todo={data}
+                  editShow={editShow}
+                  setEditShow={setEditShow}
+                  openEdit={openEdit}
+                  openDelete={openDelete}
+                />
+              );
+            })}
           </div>
         </Container>
       </div>
 
-      {show && <CreateTask show={show} handleClose={handleClose} />}
+      {show && (
+        <CreateTask
+          show={show}
+          handleClose={handleClose}
+          todos={todos}
+          setTodos={setTodos}
+        />
+      )}
       {editShow && (
         <EditTaskPopup
           editShow={editShow}
