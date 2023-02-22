@@ -9,12 +9,11 @@ const Account = ()=>{
     useEffect(()=>{
      const fetchUser = async()=>{
        const fetchedUser = await GetUser(user)
-       console.log('fff',fetchedUser.data)
        setUser(fetchedUser.data)
      }
      fetchUser()
     }, [])
-    // console.log('user', user)
+    
     return(
       <>
       <div style={{backgroundColor: 'rgb(211, 228, 228)', height: '870px'}}>
