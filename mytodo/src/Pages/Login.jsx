@@ -45,7 +45,7 @@ const Login = () => {
       setErrors(todoError);
       return;
     }
-    setButtonLoading(true);
+    setButtonLoading(false);
     await LoginUser(user)(userDispatch);
 
     setButtonLoading(false);

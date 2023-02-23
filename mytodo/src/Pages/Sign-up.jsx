@@ -48,7 +48,7 @@ const Signup = () => {
       setErrors(todoErrors);
       return;
     }
-    setButtonLoading(true);
+    setButtonLoading(false);
     await AddUser(user)(userDispatch);
 
     setButtonLoading(false);
