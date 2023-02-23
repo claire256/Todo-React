@@ -33,7 +33,7 @@ const Signup = () => {
   useEffect(() => {
     if (userState.user?.id) {
       userDispatch({ type: SIGNUP, payload: null });
-      return navigate("/");
+      return navigate("/login");
     }
 
     if (userState.signup_errors) {

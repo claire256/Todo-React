@@ -1,9 +1,14 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-
+import {Link, useNavigate} from 'react-router-dom';
 import {Navbar, Nav, Container} from 'react-bootstrap';
 
 const NavigationBar = ()=>{
+    const auth = localStorage.getItem("access_token")
+    const navigate = useNavigate();
+    const logout =()=>{
+        localStorage.clear()
+        navigate("/login")
+    }
 
     return(
         <>
@@ -16,8 +21,11 @@ const NavigationBar = ()=>{
                  <Nav.Link as={Link} to="/">Home</Nav.Link>
                  <Nav.Link as={Link} to="/todos">Todos</Nav.Link>
                  <Nav.Link as={Link} to="/account">Account</Nav.Link>
-                 <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
-                 <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                 {auth? <Nav.Link as={Link} onClick={logout} to="/login"></Nav.Link> :
+                 <Nav.Link as={Link} to="/signup">Signup</Nav.Link>}
+                 {auth? <Nav.Link as={Link} onClick={logout} to="/login">Logout</Nav.Link> :
+                 <Nav.Link as={Link} to="/login">Login</Nav.Link>}
+                   
                </Nav>
               </Navbar.Collapse>         
              </Container>
