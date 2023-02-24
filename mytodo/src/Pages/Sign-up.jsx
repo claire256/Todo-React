@@ -43,9 +43,9 @@ const Signup = () => {
   }, [userState]);
   const addAccount = async (e) => {
     e.preventDefault();
-    const todoErrors = ValUser(user);
-    if (todoErrors.length > 0) {
-      setErrors(todoErrors);
+    const formErrors = ValUser(user);
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
       return;
     }
     setButtonLoading(true);
