@@ -41,14 +41,16 @@ export const EditTodo = async (task)=> {
 export const DeleteTodo = async(task)=>{
     
     const token = localStorage.getItem('access_token')
+    console.log('token', token)
     try{
         const response = await axios.delete(`/todos/${task.id}`, {
-     headers: {"Authorization": 'Beare '+token}       
+     headers: {"Authorization": 'Bearer '+token}       
         })
         return response.data.data
     }
     catch(err){
         if(err.response.status === 400){
+            console.log('ddd', err.data.data)
          return err.response.data.data
         }
         else{
