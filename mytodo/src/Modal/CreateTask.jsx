@@ -61,12 +61,12 @@ const CreateTask = ({show, handleClose, todos, setTodos})=>{
             </Form.Group>
             <Form.Group className="mt-2">
             <Form.Label >Description</Form.Label>
-            <Form.Control type="text" name="description" onChange={updateTask}/>
+            <Form.Control as="textarea" name="description" onChange={updateTask}/>
             {errors.description && <p className = "error">{errors.description}</p>}
             </Form.Group>
             <Form.Group  className="mt-4">
             <Form.Label >Date</Form.Label>
-            <Form.Control type="date" name="date" onChange={updateTask}/> 
+            <Form.Control type="date" name="date" min={new Date().toISOString().split('T')[0]} onChange={updateTask}/> 
             {errors.date && <p className = "error">{errors.date}</p>}
             </Form.Group>
             </Form>

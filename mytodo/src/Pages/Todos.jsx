@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Button, Container } from "react-bootstrap";
 import CreateTask from "../Modal/CreateTask";
 import Kard from "../Components/Kard";
-import { DeleteTodo, GetTodos } from "../Api/tasks";
+import { DeleteTodo, GetTodos, EditTodo } from "../Api/tasks";
 import EditTaskPopup from "../Modal/EditTaskPopup";
 import DeleteTaskPopup from "../Modal/DeleteTaskPopup";
+import ValidateTodos from "../Auth/ValidateTodos";
+
 
 const Todos = () => {
   const [show, setShow] = useState(false);
@@ -13,6 +15,20 @@ const Todos = () => {
   const [todos, setTodos] = useState([]);
   const [selectedTodo, setSelectedTodo] = useState({});
   const [apierrors, setApierrors] = useState(null);
+  const [errors, setErrors] = useState({})
+  const [buttonLoading, setButtonLoading] = useState(false)
+//   const [task, setTask] = useState({
+//     title:'',
+//     description:'',
+//     date:''
+// })
+// const updateTask =(e)=> {
+//   setTask({...task, [e.target.name]: e.target.value})
+// }
+
+// useEffect(()=>{
+//       setTask(selectedTodo)
+//    },[])
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -29,7 +45,6 @@ const Todos = () => {
     setSelectedTodo(todo);
     setDelShow(true);
   };
-
   useEffect(() => {
     const fetchData = async () => {
       const tasks = await GetTodos();
@@ -50,7 +65,32 @@ const Todos = () => {
       return setApierrors(deletedTodo);
     }
   };
-
+  const handleEdit = async(e)=>{
+          e.preventDefault()
+          setErrors({})
+          const todoError = ValidateTodos(selectedTodo)
+          if(Object.keys(todoError).length>0){
+            setErrors(todoError)
+            return;
+          }
+          setButtonLoading(true) 
+          const EditedTodo = await EditTodo(selectedTodo)
+          console.log('todos', EditedTodo)
+          const filtertodos = todos.filter(function(ele){
+            return ele.id !== EditedTodo.id
+          })
+    
+          if(EditedTodo.id){
+          const newTodos=[EditedTodo, ...filtertodos]
+          setTodos(newTodos)
+          handleEditClose()
+        
+          }else{
+            setApierrors(EditedTodo)
+          }
+        setButtonLoading(false) 
+        }     
+    
   return (
     <>
       <div className="header text-center">
@@ -88,6 +128,7 @@ const Todos = () => {
       )}
       {editShow && (
         <EditTaskPopup
+          handleEdit={handleEdit}
           editShow={editShow}
           handleEditClose={handleEditClose}
           todos={todos}
@@ -105,6 +146,6 @@ const Todos = () => {
       )}
     </>
   );
-};
+}
 
 export default Todos;

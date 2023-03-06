@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button } from "react-bootstrap";
 import Kard from "../Components/Kard";
-import { DeleteTodo, GetTodos } from "../Api/tasks";
+import { DeleteTodo, GetTodos, EditTodo} from "../Api/tasks";
 import { format, isAfter } from "date-fns";
 import CreateTask from "../Modal/CreateTask";
 import DeleteTaskPopup from "../Modal/DeleteTaskPopup";
+import EditTaskPopup from "../Modal/EditTaskPopup";
+import ValidateTodos from "../Auth/ValidateTodos";
 
 const Home = () => {
   const [todayTodos, setTodayTodos] = useState([]);
@@ -14,10 +16,13 @@ const Home = () => {
   const [apierrors, setApierrors] = useState(null);
   const [selectedTodo, setSelectedTodo] = useState({});
   const [delshow, setDelShow] = useState(false);
-
+  const [errors, setErrors] = useState({});
+  const [editShow, setEditShow] = useState(false);
+  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleDelClose = () => setDelShow(false);
+  const handleEditClose = () => setEditShow(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +54,10 @@ const Home = () => {
     setSelectedTodo(todo);
     setDelShow(true);
   };
+  const openEdit = (todo) => {
+    setSelectedTodo(todo);
+    setEditShow(true);
+  };
   const handleDelete = async () => {
     const deletedTodo = await DeleteTodo(selectedTodo);
     if (deletedTodo.id) {
@@ -59,10 +68,40 @@ const Home = () => {
         return ele.id !== selectedTodo.id;
       });
       handleDelClose();
-      setUpcomingTodos(filterupcomingtodos)
+      setUpcomingTodos(filterupcomingtodos);
       setTodayTodos(filtertodaytodos);
     } else {
       return setApierrors(deletedTodo);
+    }
+  };
+  const handleEdit = async (e) => {
+    setErrors({});
+    const todoError = ValidateTodos(selectedTodo);
+    if (Object.keys(todoError).length > 0) {
+      setErrors(todoError);
+      return;
+    }
+    const EditedTodo = await EditTodo(selectedTodo);
+    const filtertodaytodos = todayTodos.filter(function (ele) {
+      return ele.id !== selectedTodo.id;
+    })
+      console.log('edit', EditedTodo)
+      if (EditedTodo.id) {
+      // const filtertodaytodos = todayTodos.filter(function (ele) {
+      //   return ele.id !== EditedTodo.id;
+      // });
+      console.log('today', filtertodaytodos)
+      // const filterupcomingtodos = upcomingTodos.filter(function (ele) {
+      //   return ele.id !== selectedTodo.id;
+      // });
+       const newtodaytodos = [EditedTodo, ...filtertodaytodos];
+      // const newupcomingtodos = [EditedTodo, ...filterupcomingtodos]
+      // setUpcomingTodos(newupcomingtodos);
+      setTodayTodos(newtodaytodos);
+      // setTodayTodos(filtertodaytodos)
+      handleEditClose();
+    } else {
+      setApierrors(EditedTodo);
     }
   };
 
@@ -76,14 +115,14 @@ const Home = () => {
           <h4 className="pt-4">Today's tasks</h4>
           <div className="carddiv ">
             {todayTodos.map((data) => (
-              <Kard todo={data} key={data.id} openDelete={openDelete} />
+              <Kard todo={data} key={data.id} openDelete={openDelete} openEdit={openEdit} />
             ))}
           </div>
           {apierrors && <p className="error">{apierrors}</p>}
           <h4 className="pt-5">Upcoming tasks</h4>
           <div className="carddiv">
             {upcomingTodos.map((data) => (
-              <Kard todo={data} key={data.id} openDelete={openDelete} />
+              <Kard todo={data} key={data.id} openDelete={openDelete} openEdit={openEdit} />
             ))}
           </div>
           <div className="homebutton">
@@ -114,6 +153,17 @@ const Home = () => {
           selectedTodo={selectedTodo}
           delshow={delshow}
           handleDelClose={handleDelClose}
+        />
+      )}
+      {editShow && (
+        <EditTaskPopup
+          handleEdit={handleEdit}
+          editShow={editShow}
+          handleEditClose={handleEditClose}
+          todos={todos}
+          setTodos={setTodos}
+          setSelectedTodo={setSelectedTodo}
+          selectedTodo={selectedTodo}
         />
       )}
     </>

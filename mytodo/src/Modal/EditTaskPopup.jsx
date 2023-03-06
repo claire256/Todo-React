@@ -1,10 +1,10 @@
 import React,{useEffect, useState} from 'react';
-import {EditTodo} from '../Api/tasks'
+// import {EditTodo} from '../Api/tasks'
 import {Button, Form, Modal, Spinner} from 'react-bootstrap';
 import {format} from 'date-fns';
-import ValidateTodos from '../Auth/ValidateTodos';
+// import ValidateTodos from '../Auth/ValidateTodos';
 
-const EditTaskPopup = ({editShow, handleEditClose, todos, setTodos, setSelectedTodo, selectedTodo})=>{
+const EditTaskPopup = ({editShow, handleEditClose, handleEdit, todos, setTodos, selectedTodo})=>{
      
     const [buttonLoading, setButtonLoading] = useState(false)
     const [errors, setErrors] = useState({})
@@ -18,34 +18,34 @@ const updateTask =(e)=> {
       setTask({...task, [e.target.name]: e.target.value})
 }
 useEffect(()=>{
-   setTask(selectedTodo)
+    setTask(selectedTodo)
 },[])
 
-const handleSubmit = async(e)=>{
-      e.preventDefault()
-      setErrors({})
-      const todoError = ValidateTodos(task)
-      if(Object.keys(todoError).length>0){
-        setErrors(todoError)
-        return;
-      }
-      setButtonLoading(true) 
-      const EditedTodo = await EditTodo(task)
+// const handleEdit = async(e)=>{
+//       e.preventDefault()
+//       setErrors({})
+//       const todoError = ValidateTodos(task)
+//       if(Object.keys(todoError).length>0){
+//         setErrors(todoError)
+//         return;
+//       }
+//       setButtonLoading(true) 
+//       const EditedTodo = await EditTodo(task)
     
-      const filtertodos = todos.filter(function(ele){
-        return ele.id !== EditedTodo.id
-      })
+//       const filtertodos = todos.filter(function(ele){
+//         return ele.id !== EditedTodo.id
+//       })
 
-      if(EditedTodo.id){
-      const newTodos=[EditedTodo, ...filtertodos]
-      setTodos(newTodos)
-      handleEditClose()
+//       if(EditedTodo.id){
+//       const newTodos=[EditedTodo, ...filtertodos]
+//       setTodos(newTodos)
+//       handleEditClose()
     
-      }else{
-        setApierrors(EditedTodo)
-      }
-      setButtonLoading(false)      
-  }
+//       }else{
+//         setApierrors(EditedTodo)
+//       }
+//       setButtonLoading(false)      
+//   }
 
     return(
         <>
@@ -76,8 +76,8 @@ const handleSubmit = async(e)=>{
             </Form>
             </Modal.Body>
         <Modal.Footer>
-        {!buttonLoading && (<Button variant="success" onClick={handleSubmit}>Update</Button>)} 
-        {buttonLoading && (<Button variant="success" onClick={handleSubmit}  disabled={buttonLoading}>
+        {!buttonLoading && (<Button variant="success" onClick={handleEdit}>Update</Button>)} 
+        {buttonLoading && (<Button variant="success" onClick={handleEdit}  disabled={buttonLoading}>
             <Spinner
                     as="span"
                     variant="light"

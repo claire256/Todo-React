@@ -25,10 +25,12 @@ export const EditTodo = async (task)=> {
         const response = await axios.put(`/todos/${task.id}`, task, {
             headers: {"Authorization": 'Bearer '+token}
         })
+        console.log('res', response.data)
         return response.data.data   
     }
     catch(err){
         if(err.response.status === 400){
+            console.log('err', err.response.data)
             return err.response.data.data
         }
         else{
