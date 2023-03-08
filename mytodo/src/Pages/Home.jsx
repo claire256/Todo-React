@@ -66,7 +66,7 @@ const Home = () => {
     <>
       
       <div
-        // style={{ backgroundColor: "rgb(211, 228, 228)" }}
+        
         className="homediv"
       >
         <Container className="home-cont">
