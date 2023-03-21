@@ -43,7 +43,7 @@ export const DeleteTodo = async(task)=>{
     const token = localStorage.getItem('access_token')
     try{
         const response = await axios.delete(`/todos/${task.id}`, {
-     headers: {"Authorization": 'Beare '+token}       
+     headers: {"Authorization": 'Bearer '+token}       
         })
         return response.data.data
     }

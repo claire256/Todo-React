@@ -5,7 +5,6 @@ import ValidateTodos from '../Auth/ValidateTodos'
 import {AppContext} from '../Context/Context'
 import { ADDTODO, ADDTODO_ERRORS } from '../Context/Types';
 
-
 const CreateTask = ({show, handleClose, todos, setTodos})=>{
     const {todoState, todoDispatch} = useContext(AppContext)
     const [buttonLoading, setButtonLoading] = useState(false)
@@ -31,7 +30,6 @@ const CreateTask = ({show, handleClose, todos, setTodos})=>{
      todoDispatch({type: ADDTODO_ERRORS, payload: null})
     }
   },[todoState])
-
   const handleSubmit = async(e)=>{
       e.preventDefault()
       setErrors({})
@@ -41,8 +39,9 @@ const CreateTask = ({show, handleClose, todos, setTodos})=>{
          return;
       }
       setButtonLoading(true) 
-      await AddTodo(task)(todoDispatch)  
-      setButtonLoading(false)      
+       await AddTodo(task)(todoDispatch) 
+      setButtonLoading(false) 
+
     }
 
     return(
@@ -61,12 +60,12 @@ const CreateTask = ({show, handleClose, todos, setTodos})=>{
             </Form.Group>
             <Form.Group className="mt-2">
             <Form.Label >Description</Form.Label>
-            <Form.Control type="text" name="description" onChange={updateTask}/>
+            <Form.Control as="textarea" name="description" onChange={updateTask}/>
             {errors.description && <p className = "error">{errors.description}</p>}
             </Form.Group>
             <Form.Group  className="mt-4">
             <Form.Label >Date</Form.Label>
-            <Form.Control type="date" name="date" onChange={updateTask}/> 
+            <Form.Control type="date" name="date" min={new Date().toISOString().split('T')[0]} onChange={updateTask}/> 
             {errors.date && <p className = "error">{errors.date}</p>}
             </Form.Group>
             </Form>

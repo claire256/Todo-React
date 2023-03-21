@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Button, Container } from "react-bootstrap";
 import CreateTask from "../Modal/CreateTask";
 import Kard from "../Components/Kard";
-import { GetTodos } from "../Api/tasks";
+import { DeleteTodo, GetTodos, EditTodo } from "../Api/tasks";
 import EditTaskPopup from "../Modal/EditTaskPopup";
 import DeleteTaskPopup from "../Modal/DeleteTaskPopup";
+import ValidateTodos from "../Auth/ValidateTodos";
 
 const Todos = () => {
   const [show, setShow] = useState(false);
@@ -12,6 +13,14 @@ const Todos = () => {
   const [delshow, setDelShow] = useState(false);
   const [todos, setTodos] = useState([]);
   const [selectedTodo, setSelectedTodo] = useState({});
+  const [apierrors, setApierrors] = useState(null);
+  const [errors, setErrors] = useState({});
+  const [buttonLoading, setButtonLoading] = useState(false);
+  const [task, setTask] = useState({
+    title: "",
+    description: "",
+    date: "",
+  });
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -28,7 +37,6 @@ const Todos = () => {
     setSelectedTodo(todo);
     setDelShow(true);
   };
-
   useEffect(() => {
     const fetchData = async () => {
       const tasks = await GetTodos();
@@ -36,6 +44,42 @@ const Todos = () => {
     };
     fetchData();
   }, []);
+
+  const handleDelete = async (e) => {
+    const deletedTodo = await DeleteTodo(selectedTodo);
+    if (deletedTodo.id) {
+      const filtertodos = todos.filter(function (ele) {
+        return ele.id !== deletedTodo.id;
+      });
+      handleDelClose();
+      return setTodos(filtertodos);
+    } else {
+      return setApierrors(deletedTodo);
+    }
+  };
+
+  const handleEdit = async (e) => {
+    setErrors({});
+    const todoError = ValidateTodos(task);
+    if (Object.keys(todoError).length > 0) {
+      setErrors(todoError);
+      return;
+    }
+    setButtonLoading(true);
+    const EditedTodo = await EditTodo(task);
+    console.log("todos", EditedTodo);
+    const filtertodos = todos.filter(function (ele) {
+      return ele.id !== EditedTodo.id;
+    });
+    if (EditedTodo.id) {
+      const newTodos = [EditedTodo, ...filtertodos];
+      setTodos(newTodos);
+      handleEditClose();
+    } else {
+      setApierrors(EditedTodo);
+    }
+    setButtonLoading(false);
+  };
 
   return (
     <>
@@ -47,6 +91,7 @@ const Todos = () => {
       </div>
       <div>
         <Container className="todo-cont">
+          {apierrors && <p className="error">{apierrors}</p>}
           <div className="carddiv">
             {todos.map((data) => {
               return (
@@ -73,20 +118,22 @@ const Todos = () => {
       )}
       {editShow && (
         <EditTaskPopup
+          handleEdit={handleEdit}
           editShow={editShow}
           handleEditClose={handleEditClose}
+          setTask={setTask}
+          task={task}
           todos={todos}
           setTodos={setTodos}
           setSelectedTodo={setSelectedTodo}
           selectedTodo={selectedTodo}
+          errors={errors}
+          setErrors={setErrors}
         />
       )}
       {delshow && (
         <DeleteTaskPopup
-          todos={todos}
-          setTodos={setTodos}
-          setSelectedTodo={setSelectedTodo}
-          selectedTodo={selectedTodo}
+          handleDelete={handleDelete}
           delshow={delshow}
           handleDelClose={handleDelClose}
         />
