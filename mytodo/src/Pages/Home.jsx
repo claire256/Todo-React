@@ -4,6 +4,7 @@ import Kard from "../Components/Kard";
 import { DeleteTodo, GetTodos } from "../Api/tasks";
 import { format, isAfter } from "date-fns";
 import DeleteTaskPopup from "../Modal/DeleteTaskPopup";
+import CreateTask from "../Modal/CreateTask";
 
 const Home = () => {
   const [todayTodos, setTodayTodos] = useState([]);
@@ -12,8 +13,12 @@ const Home = () => {
   const [selectedTodo, setSelectedTodo] = useState({});
   const [delshow, setDelShow] = useState(false);
   const [showtodo, setShowtodo] = useState(null);
+  const [show, setShow] = useState(false);
+  const [todos, setTodos] = useState([]);
 
   const handleDelClose = () => setDelShow(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,7 +88,19 @@ const Home = () => {
               <Kard todo={data} key={data.id} openDelete={openDelete} />
             ))}
           </div>
-          <a className="addtodo mt-5" href="/Todos">
+          <div className="homebutton">
+            <Button
+              className="mt-3"
+              variant="success"
+              style={{ width: "20%" }}
+              onClick={handleShow}
+            >
+              Create Task
+            </Button>
+          </div>
+        </Container>
+      </div>
+          {/* <a className="addtodo mt-5" href="/Todos">
             <i className="fa-regular fa-plus"></i>
             <p className="addpara">Add Todo</p>
           </a>
@@ -98,7 +115,15 @@ const Home = () => {
             </Button>
           </div>
         </Container>
-      </div>
+      </div> */}
+      {show && (
+        <CreateTask
+          show={show}
+          handleClose={handleClose}
+          todos={todos}
+          setTodos={setTodos}
+        />
+      )}
 
       {delshow && (
         <DeleteTaskPopup
