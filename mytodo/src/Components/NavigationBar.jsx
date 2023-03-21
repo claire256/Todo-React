@@ -21,8 +21,7 @@ const NavigationBar = ()=>{
                  <Nav.Link as={Link} to="/">Home</Nav.Link>
                  <Nav.Link as={Link} to="/todos">Todos</Nav.Link>
                  <Nav.Link as={Link} to="/account">Account</Nav.Link>
-                 {auth? <Nav.Link as={Link} onClick={logout} to="/login"></Nav.Link> :
-                 <Nav.Link as={Link} to="/signup">Signup</Nav.Link>}
+                 {!auth && <Nav.Link as={Link} to="/signup">Signup</Nav.Link>}
                  {auth? <Nav.Link as={Link} onClick={logout} to="/login">Logout</Nav.Link> :
                  <Nav.Link as={Link} to="/login">Login</Nav.Link>}
                    
