@@ -33,15 +33,17 @@ const Signup = () => {
   useEffect(() => {
     if (userState.user?.id) {
       userDispatch({ type: SIGNUP, payload: null });
-      return navigate("/login");
+      setButtonLoading(false)
+      return navigate("/");
     }
 
     if (userState.signup_errors) {
       setApierrors(userState.signup_errors);
       userDispatch({ type: SIGNUP_ERRORS, payload: null });
+      setButtonLoading(false)
     }
-  }, [userState]);
-  const addAccount = async (e) => {
+  }, [userState.signup_errors, userState.user?.id]);
+  const addAccount =  (e) => {
     e.preventDefault();
     const todoErrors = ValUser(user);
     if (todoErrors.length > 0) {
@@ -49,9 +51,8 @@ const Signup = () => {
       return;
     }
     setButtonLoading(true);
-    await AddUser(user)(userDispatch);
+    AddUser(user)(userDispatch);
 
-    setButtonLoading(false);
   };
 
   return (

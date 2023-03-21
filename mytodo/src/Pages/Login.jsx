@@ -31,11 +31,13 @@ const Login = () => {
     if (userState.user?.accessToken) {
       localStorage.setItem("access_token", userState.user.accessToken);
       userDispatch({ type: LOGIN, payload: null });
+      setButtonLoading(false)
       return navigate("/");
     }
     if (userState.login_err) {
       setApierrors(userState.login_err);
       userDispatch({ type: LOGIN_ERRORS, payload: null });
+      setButtonLoading(false)
     }
   }, [userState]);
   const signIn = async (e) => {
@@ -47,8 +49,6 @@ const Login = () => {
     }
     setButtonLoading(true);
     await LoginUser(user)(userDispatch);
-
-    setButtonLoading(false);
   };
   return (
     <>

@@ -8,7 +8,7 @@ export const AddUser = (user)=> async(dispatch)=>{
         dispatch({type: SIGNUP, payload: response.data.data})
     }
     catch(err){
-         dispatch({type: SIGNUP_ERRORS, payload:err.data.data})
+         dispatch({type: SIGNUP_ERRORS, payload:err.response.data.Message})
     }
 }
 
@@ -18,6 +18,6 @@ export const LoginUser = (user)=> async(dispatch)=>{
             dispatch({type: LOGIN, payload: response.data}) 
         }
         catch(err){
-            dispatch({type: LOGIN_ERRORS, payload: err.data})  
+            dispatch({type: LOGIN_ERRORS, payload: err.response.data.data})  
         }
     }
