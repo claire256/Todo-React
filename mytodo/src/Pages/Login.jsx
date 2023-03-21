@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ValUser from "../Auth/ValUser";
+// import ValUser from "../Auth/ValUser";
 import {
   Button,
   Card,
@@ -28,6 +28,7 @@ const Login = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   useEffect(() => {
+     
     if (userState.user?.accessToken) {
       localStorage.setItem("access_token", userState.user.accessToken);
       userDispatch({ type: LOGIN, payload: null });
@@ -40,11 +41,31 @@ const Login = () => {
       setButtonLoading(false)
     }
   }, [userState]);
+
+  const ValidateUser =(user)=>{
+    let errors = {}
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(!user.email){
+      errors.email= "Email required"
+    }
+    else if(!re.test(user.email)){
+       errors.email= "Email is invalid"
+    }
+      
+     if(!user.password){
+      errors.password = "Password required"
+     
+     }else if(!user.password.length> 5){
+        errors.password ="Password must be more than 5 characters"
+     }
+  
+     return errors;
+  }
   const signIn = async (e) => {
     e.preventDefault();
-    const todoError = ValUser(user);
-    if (todoError.length > 0) {
-      setErrors(todoError);
+    const formError = ValidateUser(user);
+    if (Object.keys(formError).length>0) {
+      setErrors(formError);
       return;
     }
     setButtonLoading(true);
