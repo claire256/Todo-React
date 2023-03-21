@@ -5,7 +5,6 @@ import ValidateTodos from '../Auth/ValidateTodos'
 import {AppContext} from '../Context/Context'
 import { ADDTODO, ADDTODO_ERRORS } from '../Context/Types';
 
-
 const CreateTask = ({show, handleClose, todos, setTodos})=>{
     const {todoState, todoDispatch} = useContext(AppContext)
     const [buttonLoading, setButtonLoading] = useState(false)
@@ -31,7 +30,6 @@ const CreateTask = ({show, handleClose, todos, setTodos})=>{
      todoDispatch({type: ADDTODO_ERRORS, payload: null})
     }
   },[todoState])
-
   const handleSubmit = async(e)=>{
       e.preventDefault()
       setErrors({})
@@ -41,8 +39,9 @@ const CreateTask = ({show, handleClose, todos, setTodos})=>{
          return;
       }
       setButtonLoading(true) 
-      await AddTodo(task)(todoDispatch)  
-      setButtonLoading(false)      
+       await AddTodo(task)(todoDispatch) 
+      setButtonLoading(false) 
+
     }
 
     return(

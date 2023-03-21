@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button } from "react-bootstrap";
 import Kard from "../Components/Kard";
-import { DeleteTodo, GetTodos, EditTodo} from "../Api/tasks";
+import { DeleteTodo, GetTodos, EditTodo } from "../Api/tasks";
 import { format, isAfter } from "date-fns";
 import CreateTask from "../Modal/CreateTask";
 import DeleteTaskPopup from "../Modal/DeleteTaskPopup";
@@ -18,7 +18,12 @@ const Home = () => {
   const [delshow, setDelShow] = useState(false);
   const [errors, setErrors] = useState({});
   const [editShow, setEditShow] = useState(false);
-  
+  const [task, setTask] = useState({
+    title: "",
+    description: "",
+    date: "",
+  });
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleDelClose = () => setDelShow(false);
@@ -76,29 +81,18 @@ const Home = () => {
   };
   const handleEdit = async (e) => {
     setErrors({});
-    const todoError = ValidateTodos(selectedTodo);
+    const todoError = ValidateTodos(task);
     if (Object.keys(todoError).length > 0) {
       setErrors(todoError);
       return;
     }
-    const EditedTodo = await EditTodo(selectedTodo);
+    const EditedTodo = await EditTodo(task);
     const filtertodaytodos = todayTodos.filter(function (ele) {
       return ele.id !== selectedTodo.id;
-    })
-      console.log('edit', EditedTodo)
-      if (EditedTodo.id) {
-      // const filtertodaytodos = todayTodos.filter(function (ele) {
-      //   return ele.id !== EditedTodo.id;
-      // });
-      console.log('today', filtertodaytodos)
-      // const filterupcomingtodos = upcomingTodos.filter(function (ele) {
-      //   return ele.id !== selectedTodo.id;
-      // });
-       const newtodaytodos = [EditedTodo, ...filtertodaytodos];
-      // const newupcomingtodos = [EditedTodo, ...filterupcomingtodos]
-      // setUpcomingTodos(newupcomingtodos);
+    });
+    if (EditedTodo.id) {
+      const newtodaytodos = [EditedTodo, ...filtertodaytodos];
       setTodayTodos(newtodaytodos);
-      // setTodayTodos(filtertodaytodos)
       handleEditClose();
     } else {
       setApierrors(EditedTodo);
@@ -115,14 +109,24 @@ const Home = () => {
           <h4 className="pt-4">Today's tasks</h4>
           <div className="carddiv ">
             {todayTodos.map((data) => (
-              <Kard todo={data} key={data.id} openDelete={openDelete} openEdit={openEdit} />
+              <Kard
+                todo={data}
+                key={data.id}
+                openDelete={openDelete}
+                openEdit={openEdit}
+              />
             ))}
           </div>
           {apierrors && <p className="error">{apierrors}</p>}
           <h4 className="pt-5">Upcoming tasks</h4>
           <div className="carddiv">
             {upcomingTodos.map((data) => (
-              <Kard todo={data} key={data.id} openDelete={openDelete} openEdit={openEdit} />
+              <Kard
+                todo={data}
+                key={data.id}
+                openDelete={openDelete}
+                openEdit={openEdit}
+              />
             ))}
           </div>
           <div className="homebutton">
@@ -164,6 +168,10 @@ const Home = () => {
           setTodos={setTodos}
           setSelectedTodo={setSelectedTodo}
           selectedTodo={selectedTodo}
+          setTask={setTask}
+          task={task}
+          errors={errors}
+          setErrors={setErrors}
         />
       )}
     </>

@@ -7,7 +7,6 @@ import EditTaskPopup from "../Modal/EditTaskPopup";
 import DeleteTaskPopup from "../Modal/DeleteTaskPopup";
 import ValidateTodos from "../Auth/ValidateTodos";
 
-
 const Todos = () => {
   const [show, setShow] = useState(false);
   const [editShow, setEditShow] = useState(false);
@@ -15,20 +14,13 @@ const Todos = () => {
   const [todos, setTodos] = useState([]);
   const [selectedTodo, setSelectedTodo] = useState({});
   const [apierrors, setApierrors] = useState(null);
-  const [errors, setErrors] = useState({})
-  const [buttonLoading, setButtonLoading] = useState(false)
-//   const [task, setTask] = useState({
-//     title:'',
-//     description:'',
-//     date:''
-// })
-// const updateTask =(e)=> {
-//   setTask({...task, [e.target.name]: e.target.value})
-// }
-
-// useEffect(()=>{
-//       setTask(selectedTodo)
-//    },[])
+  const [errors, setErrors] = useState({});
+  const [buttonLoading, setButtonLoading] = useState(false);
+  const [task, setTask] = useState({
+    title: "",
+    description: "",
+    date: "",
+  });
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -65,32 +57,30 @@ const Todos = () => {
       return setApierrors(deletedTodo);
     }
   };
-  const handleEdit = async(e)=>{
-          e.preventDefault()
-          setErrors({})
-          const todoError = ValidateTodos(selectedTodo)
-          if(Object.keys(todoError).length>0){
-            setErrors(todoError)
-            return;
-          }
-          setButtonLoading(true) 
-          const EditedTodo = await EditTodo(selectedTodo)
-          console.log('todos', EditedTodo)
-          const filtertodos = todos.filter(function(ele){
-            return ele.id !== EditedTodo.id
-          })
-    
-          if(EditedTodo.id){
-          const newTodos=[EditedTodo, ...filtertodos]
-          setTodos(newTodos)
-          handleEditClose()
-        
-          }else{
-            setApierrors(EditedTodo)
-          }
-        setButtonLoading(false) 
-        }     
-    
+
+  const handleEdit = async (e) => {
+    setErrors({});
+    const todoError = ValidateTodos(task);
+    if (Object.keys(todoError).length > 0) {
+      setErrors(todoError);
+      return;
+    }
+    setButtonLoading(true);
+    const EditedTodo = await EditTodo(task);
+    console.log("todos", EditedTodo);
+    const filtertodos = todos.filter(function (ele) {
+      return ele.id !== EditedTodo.id;
+    });
+    if (EditedTodo.id) {
+      const newTodos = [EditedTodo, ...filtertodos];
+      setTodos(newTodos);
+      handleEditClose();
+    } else {
+      setApierrors(EditedTodo);
+    }
+    setButtonLoading(false);
+  };
+
   return (
     <>
       <div className="header text-center">
@@ -131,10 +121,14 @@ const Todos = () => {
           handleEdit={handleEdit}
           editShow={editShow}
           handleEditClose={handleEditClose}
+          setTask={setTask}
+          task={task}
           todos={todos}
           setTodos={setTodos}
           setSelectedTodo={setSelectedTodo}
           selectedTodo={selectedTodo}
+          errors={errors}
+          setErrors={setErrors}
         />
       )}
       {delshow && (
@@ -146,6 +140,6 @@ const Todos = () => {
       )}
     </>
   );
-}
+};
 
 export default Todos;
