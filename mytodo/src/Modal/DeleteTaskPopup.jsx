@@ -5,8 +5,10 @@ const DeleteTaskPopup = ({
   handleDelete,
   delshow,
   handleDelClose,
+  setApierrors,
+  apierrors
 }) => {
-  const [apierrors, setApierrors] = useState(null);
+  // const [apierrors, setApierrors] = useState(null);
   const [buttonLoading, setButtonLoading] = useState(false)
 
   return (

@@ -79,7 +79,7 @@ const Home = () => {
               <Kard todo={data} key={data.id} openDelete={openDelete} />
             ))}
           </div>
-          {apierrors && <p className="error">{apierrors}</p>}
+          {/* {apierrors && <p className="error">{apierrors}</p>} */}
           <h4 className="pt-5">Upcoming tasks</h4>
           <div className="carddiv">
             {upcomingTodos.map((data) => (
@@ -114,6 +114,8 @@ const Home = () => {
           selectedTodo={selectedTodo}
           delshow={delshow}
           handleDelClose={handleDelClose}
+          setApierrors ={setApierrors}
+          apierrors ={apierrors}
         />
       )}
     </>

@@ -61,7 +61,7 @@ const Todos = () => {
       </div>
       <div>
         <Container className="todo-cont">
-          {apierrors && <p className="error">{apierrors}</p>}
+          {/* {apierrors && <p className="error">{apierrors}</p>} */}
           <div className="carddiv">
             {todos.map((data) => {
               return (
@@ -101,6 +101,8 @@ const Todos = () => {
           handleDelete={handleDelete}
           delshow={delshow}
           handleDelClose={handleDelClose}
+          setApierrors ={setApierrors}
+          apierrors ={apierrors}
         />
       )}
     </>
