@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Container } from "react-bootstrap";
 import CreateTask from "../Modal/CreateTask";
 import Kard from "../Components/Kard";
-import { GetTodos } from "../Api/tasks";
+import { DeleteTodo, GetTodos } from "../Api/tasks";
 import EditTaskPopup from "../Modal/EditTaskPopup";
 import DeleteTaskPopup from "../Modal/DeleteTaskPopup";
 
@@ -12,6 +12,7 @@ const Todos = () => {
   const [delshow, setDelShow] = useState(false);
   const [todos, setTodos] = useState([]);
   const [selectedTodo, setSelectedTodo] = useState({});
+  const [apierrors, setApierrors] = useState(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -37,6 +38,19 @@ const Todos = () => {
     fetchData();
   }, []);
 
+  const handleDelete = async (e) => {
+    const deletedTodo = await DeleteTodo(selectedTodo);
+    if (deletedTodo.id) {
+      const filtertodos = todos.filter(function (ele) {
+        return ele.id !== deletedTodo.id;
+      });
+      handleDelClose();
+      return setTodos(filtertodos);
+    } else {
+      return setApierrors(deletedTodo);
+    }
+  };
+
   return (
     <>
       <div className="header text-center">
@@ -47,6 +61,7 @@ const Todos = () => {
       </div>
       <div>
         <Container className="todo-cont">
+          {/* {apierrors && <p className="error">{apierrors}</p>} */}
           <div className="carddiv">
             {todos.map((data) => {
               return (
@@ -83,12 +98,11 @@ const Todos = () => {
       )}
       {delshow && (
         <DeleteTaskPopup
-          todos={todos}
-          setTodos={setTodos}
-          setSelectedTodo={setSelectedTodo}
-          selectedTodo={selectedTodo}
+          handleDelete={handleDelete}
           delshow={delshow}
           handleDelClose={handleDelClose}
+          setApierrors ={setApierrors}
+          apierrors ={apierrors}
         />
       )}
     </>
